@@ -43,11 +43,22 @@ public class WordEntryList {
         this.wordsList = wordsList;
     }
 
+    public WordEntryList() {
+
+    }
+
     public List<WordEntry> getWordsList() {
         return wordsList;
     }
 
     public void setWordsList(List<WordEntry> wordsList) {
         this.wordsList = wordsList;
+    }
+
+    @Override
+    public String toString() {
+        return "WordEntryList{" +
+                "wordsList=" + wordsList +
+                '}';
     }
 }
