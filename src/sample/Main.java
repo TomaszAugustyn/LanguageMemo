@@ -1,15 +1,15 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -24,9 +24,14 @@ public class Main extends Application {
 
     private Parent root;
     private Scene scene;
-    private WordEntryList wordEntryList = new WordEntryList();
+    private WordEntryList wordEntryList;
+    private ObservableList<WordEntry> data;
     @FXML private TextField filePath;
     @FXML private Button fileChooser;
+    @FXML private TableView<WordEntry> table = new TableView<WordEntry>();
+    @FXML private TableColumn wordColumn;
+    @FXML private TableColumn translationColumn;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -37,8 +42,8 @@ public class Main extends Application {
         primaryStage.setTitle("NastiaMemo");
         primaryStage.setScene(scene);
         primaryStage.show();
+        initTable();
     }
-
 
     public static void main(String[] args) {
 
@@ -56,6 +61,7 @@ public class Main extends Application {
             File file = chooser.showOpenDialog(scene.getWindow());
             Scanner scanner = new Scanner(file);
             String line = "";
+            wordEntryList = new WordEntryList();
 
             while (scanner.hasNextLine()) {
                 line = scanner.nextLine();
@@ -87,7 +93,32 @@ public class Main extends Application {
             e.printStackTrace();
             System.out.println("File not found.");
         }
+
+        fillTable(wordEntryList);
         System.out.println(wordEntryList);
         return;
     }
+
+    private void fillTable(WordEntryList wordEntryList){
+        data = FXCollections.observableArrayList(wordEntryList.getWordsList());
+        table.setItems(data);
+        table.getColumns().addAll(wordColumn, translationColumn);
+
+    }
+
+    private void initTable() {
+        wordColumn = new TableColumn("Word");
+        translationColumn = new TableColumn("Translation");
+        wordColumn.setCellValueFactory(
+                new PropertyValueFactory<WordEntry,String>("word")
+        );
+        translationColumn.setCellValueFactory(
+                new PropertyValueFactory<WordEntry,String>("translation")
+        );
+
+
+    }
+
 }
+
+
