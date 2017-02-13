@@ -29,8 +29,8 @@ public class Main extends Application {
     @FXML private TextField filePath;
     @FXML private Button fileChooser;
     @FXML private TableView<WordEntry> table = new TableView<WordEntry>();
-    @FXML private TableColumn wordColumn;
-    @FXML private TableColumn translationColumn;
+    @FXML private TableColumn<WordEntry, String> wordColumn;
+    @FXML private TableColumn<WordEntry, String> translationColumn;
 
 
     @Override
@@ -100,20 +100,28 @@ public class Main extends Application {
     }
 
     private void fillTable(WordEntryList wordEntryList){
+
+        table.getColumns().clear();
         data = FXCollections.observableArrayList(wordEntryList.getWordsList());
         table.setItems(data);
         table.getColumns().addAll(wordColumn, translationColumn);
+
+        /*data.removeAll();
+        data.addAll(wordEntryList.getWordsList());*/
 
     }
 
     private void initTable() {
         wordColumn = new TableColumn("Word");
         translationColumn = new TableColumn("Translation");
+        wordColumn.impl_setWidth(125);
+        translationColumn.impl_setWidth(122);
+
         wordColumn.setCellValueFactory(
-                new PropertyValueFactory<WordEntry,String>("word")
+                new PropertyValueFactory<WordEntry,String>("Word")
         );
         translationColumn.setCellValueFactory(
-                new PropertyValueFactory<WordEntry,String>("translation")
+                new PropertyValueFactory<WordEntry,String>("Translation")
         );
 
     }

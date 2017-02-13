@@ -73,7 +73,7 @@
                      <items>
                         <AnchorPane prefHeight="307.0" prefWidth="217.0">
                            <children>
-                              <TableView prefHeight="337.0" prefWidth="248.0">
+                              <TableView fx:id="table" prefHeight="337.0" prefWidth="248.0">
                                 <columns>
                                   <TableColumn fx:id="wordColumn" prefWidth="125.0" text="Word" />
                                   <TableColumn fx:id="translationColumn" prefWidth="122.0" text="Translation" />
