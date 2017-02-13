@@ -116,7 +116,6 @@ public class Main extends Application {
                 new PropertyValueFactory<WordEntry,String>("translation")
         );
 
-
     }
 
 }
