@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +29,7 @@ public class Main extends Application {
     private Scene scene;
     private WordEntryList wordEntryList;
     private ObservableList<WordEntry> data;
+    private File loadedFile;
     @FXML private TextField filePath;
     @FXML private Button fileChooser;
     @FXML private TableView<WordEntry> table = new TableView<WordEntry>();
@@ -35,21 +38,33 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage stage) throws Exception{
         FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader().getResource("sample/NastiaMemo.fxml"));
         loader.setController(this);
         root = loader.load();
         scene = new Scene(root);
-        primaryStage.setTitle("NastiaMemo");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setTitle("NastiaMemo");
+        stage.setScene(scene);
+        stage.show();
         initTable();
-        File file = new File(System.getProperty("user.dir") + "\\LanguageMemo.txt");
-        if (!file.exists()) {
-            file.createNewFile();
+        loadedFile = new File(System.getProperty("user.dir") + "\\LanguageMemo.txt");
+        if (!loadedFile.exists()) {
+            loadedFile.createNewFile();
         }
-        getWordEntryListFromFile(file);
+        getWordEntryListFromFile(loadedFile);
         fillTable(wordEntryList);
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                String currentFilePath = filePath.getText();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save changes to \"" + currentFilePath +"\"?", ButtonType.YES, ButtonType.NO);
+                alert.showAndWait();
+
+                if(alert.getResult() == ButtonType.YES) {
+                    //do stuff
+                }
+            }
+        });
 
     }
 
@@ -66,8 +81,9 @@ public class Main extends Application {
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Memo text files", "*.txt"));
         chooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
         try {
-            File file = chooser.showOpenDialog(scene.getWindow());
-            getWordEntryListFromFile(file);
+            loadedFile = chooser.showOpenDialog(scene.getWindow());
+            getWordEntryListFromFile(loadedFile);
+            fillTable(wordEntryList);
         }
         catch(NullPointerException e) {
             e.printStackTrace();
@@ -77,7 +93,6 @@ public class Main extends Application {
             System.out.println("File not found.");
         }
 
-        fillTable(wordEntryList);
         return;
     }
 
