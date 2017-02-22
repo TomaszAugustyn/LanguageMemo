@@ -15,13 +15,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main extends Application {
 
@@ -61,7 +60,7 @@ public class Main extends Application {
                 alert.showAndWait();
 
                 if(alert.getResult() == ButtonType.YES) {
-                    //do stuff
+                    WriteFileFromWordEntryList(loadedFile);
                 }
             }
         });
@@ -75,6 +74,24 @@ public class Main extends Application {
                 System.getProperty("user.dir") );
 
     }
+
+    private void WriteFileFromWordEntryList(File loadedFile) {
+
+        String streamedString = wordEntryList.getWordsList()
+                                            .stream()
+                                            .map(wordEntry -> wordEntry.getWord() + "," + wordEntry.getTranslation() + ";")
+                                            .collect(Collectors.joining());
+        try {
+            FileWriter fileWriter = new FileWriter(loadedFile, false);
+            fileWriter.write(streamedString);
+            fileWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Cannot write to \"" + loadedFile.getPath() + "\" file.");
+        }
+    }
+
 
     public void onOpenChooser(ActionEvent actionEvent) {
         FileChooser chooser = new FileChooser();
