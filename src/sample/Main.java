@@ -16,10 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main extends Application {
@@ -30,6 +27,8 @@ public class Main extends Application {
     private ObservableList<WordEntry> data;
     private File loadedFile;
     @FXML private TextField filePath;
+    @FXML private TextField wordField;
+    @FXML private TextField translationField;
     @FXML private Button fileChooser;
     @FXML private TableView<WordEntry> table = new TableView<WordEntry>();
     @FXML private TableColumn<WordEntry, String> wordColumn;
@@ -110,8 +109,29 @@ public class Main extends Application {
             System.out.println("File not found.");
         }
 
-        return;
     }
+
+    public void onAddWordBtnClicked(ActionEvent actionEvent) {
+        String word = wordField.getText();
+        String translation = translationField.getText();
+
+        if(word.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word field must not be empty.", ButtonType.OK);
+            alert.showAndWait();
+
+        }
+        else if(translation.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Translation field must not be empty.", ButtonType.OK);
+            alert.showAndWait();
+        }
+        else{
+            wordEntryList.addWord(new WordEntry(word, translation));
+            fillTable(wordEntryList);
+            wordField.clear();
+            translationField.clear();
+        }
+    }
+
 
     private void getWordEntryListFromFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream(file));
@@ -128,13 +148,7 @@ public class Main extends Application {
                         WordEntry wordEntry = new WordEntry(comaList.get(0), comaList.get(1));
                         wordEntryList.addWord(wordEntry);
                     }
-                   else{
-                        continue;
-                    }
                 }
-            }
-            else{
-                continue;
             }
 
         }
