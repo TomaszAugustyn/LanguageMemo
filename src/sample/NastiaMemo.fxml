@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -85,18 +86,21 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="307.0" prefWidth="446.0">
                            <children>
-                              <Button fx:id="addWordBtn" layoutX="194.0" layoutY="62.0" mnemonicParsing="false" onAction="#onAddWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: limegreen; -fx-border-color: black;" text="Add Word" />
-                              <TextField fx:id="wordField" layoutX="24.0" layoutY="38.0" prefHeight="25.0" prefWidth="142.0" />
-                              <TextField fx:id="translationField" layoutX="24.0" layoutY="98.0" prefHeight="25.0" prefWidth="142.0" />
-                              <Label layoutX="24.0" layoutY="16.0" text="English word:" />
-                              <Label layoutX="24.0" layoutY="78.0" text="Translation:" />
-                              <Region blendMode="COLOR_BURN" layoutX="14.0" layoutY="11.0" opacity="0.51" prefHeight="148.0" prefWidth="428.0" style="-fx-background-color: seagreen;">
+                              <Region fx:id="addAndDeleteRegion" blendMode="COLOR_BURN" layoutX="11.0" layoutY="10.0" opacity="0.51" prefHeight="167.0" prefWidth="428.0" style="-fx-background-color: seagreen;">
                                  <effect>
                                     <Blend />
                                  </effect></Region>
-                              <Region blendMode="COLOR_BURN" layoutX="14.0" layoutY="170.0" opacity="0.38" prefHeight="157.0" prefWidth="428.0" style="-fx-background-color: red;" />
-                              <TextField layoutX="24.0" layoutY="205.0" prefHeight="25.0" prefWidth="142.0" style="-fx-border-color: red; -fx-border-width: 0.6;" />
-                              <TextField layoutX="24.0" layoutY="265.0" prefHeight="25.0" prefWidth="142.0" style="-fx-border-color: red; -fx-border-width: 0.6;" />
+                              <Button fx:id="deleteWordBtn" layoutX="194.0" layoutY="108.0" mnemonicParsing="false" onAction="#onDeleteWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #ff4855; -fx-border-color: black;" text="Delete Word" />
+                              <Button fx:id="addWordBtn" layoutX="194.0" layoutY="56.0" mnemonicParsing="false" onAction="#onAddWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: limegreen; -fx-border-color: black;" text="Add Word" />
+                              <TextField fx:id="wordField" layoutX="24.0" layoutY="56.0" prefHeight="25.0" prefWidth="142.0" />
+                              <TextField fx:id="translationField" layoutX="24.0" layoutY="116.0" prefHeight="25.0" prefWidth="142.0" />
+                              <Label layoutX="24.0" layoutY="34.0" text="English word:" />
+                              <Label layoutX="24.0" layoutY="96.0" text="Translation:" />
+                              <ToggleButton layoutX="194.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="ToggleButton">
+                                 <effect>
+                                    <Blend mode="DARKEN" opacity="0.8" />
+                                 </effect>
+                              </ToggleButton>
                            </children>
                         </AnchorPane>
                      </items></SplitPane>

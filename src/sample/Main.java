@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -30,9 +31,12 @@ public class Main extends Application {
     @FXML private TextField wordField;
     @FXML private TextField translationField;
     @FXML private Button fileChooser;
+    @FXML private Button deleteWordBtn;
+    @FXML private Button addWordBtn;
     @FXML private TableView<WordEntry> table = new TableView<WordEntry>();
     @FXML private TableColumn<WordEntry, String> wordColumn;
     @FXML private TableColumn<WordEntry, String> translationColumn;
+    @FXML private Region addAndDeleteRegion;
 
 
     @Override
@@ -51,6 +55,7 @@ public class Main extends Application {
         }
         getWordEntryListFromFile(loadedFile);
         fillTable(wordEntryList);
+        //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {

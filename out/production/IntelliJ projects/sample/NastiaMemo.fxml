@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
@@ -86,10 +87,16 @@
                            <children>
                               <Button fx:id="addWordBtn" layoutX="194.0" layoutY="62.0" mnemonicParsing="false" onAction="#onAddWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: limegreen; -fx-border-color: black;" text="Add Word" />
                               <TextField fx:id="wordField" layoutX="24.0" layoutY="38.0" prefHeight="25.0" prefWidth="142.0" />
-                              <TextField fx:id="translationField" layoutX="25.0" layoutY="98.0" prefHeight="25.0" prefWidth="141.0" />
-                              <Label layoutX="25.0" layoutY="16.0" text="English word:" />
+                              <TextField fx:id="translationField" layoutX="24.0" layoutY="98.0" prefHeight="25.0" prefWidth="142.0" />
+                              <Label layoutX="24.0" layoutY="16.0" text="English word:" />
                               <Label layoutX="24.0" layoutY="78.0" text="Translation:" />
-                              <Region blendMode="COLOR_BURN" layoutX="14.0" layoutY="11.0" opacity="0.49" prefHeight="148.0" prefWidth="428.0" style="-fx-background-color: seagreen;" />
+                              <Region fx:id="addAndDeleteRegion" blendMode="COLOR_BURN" layoutX="14.0" layoutY="11.0" opacity="0.51" prefHeight="148.0" prefWidth="428.0" style="-fx-background-color: seagreen;">
+                                 <effect>
+                                    <Blend />
+                                 </effect></Region>
+                              <Region blendMode="COLOR_BURN" layoutX="14.0" layoutY="170.0" opacity="0.38" prefHeight="157.0" prefWidth="428.0" style="-fx-background-color: red;" />
+                              <TextField layoutX="24.0" layoutY="205.0" prefHeight="25.0" prefWidth="142.0" style="-fx-border-color: red; -fx-border-width: 0.6;" />
+                              <TextField layoutX="24.0" layoutY="265.0" prefHeight="25.0" prefWidth="142.0" style="-fx-border-color: red; -fx-border-width: 0.6;" />
                            </children>
                         </AnchorPane>
                      </items></SplitPane>
