@@ -15,6 +15,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import jfxtras.styles.jmetro8.ToggleSwitch;
 
 import java.io.*;
 import java.util.*;
@@ -37,6 +38,7 @@ public class Main extends Application {
     @FXML private TableColumn<WordEntry, String> wordColumn;
     @FXML private TableColumn<WordEntry, String> translationColumn;
     @FXML private Region addAndDeleteRegion;
+    @FXML private ToggleSwitch toggle;
 
 
     @Override
@@ -55,6 +57,7 @@ public class Main extends Application {
         }
         getWordEntryListFromFile(loadedFile);
         fillTable(wordEntryList);
+        toggle = new ToggleSwitch("preview", "insert");
         //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
