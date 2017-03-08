@@ -61,7 +61,7 @@ public class ToggleSwitch extends Labeled {
     public final BooleanProperty selectedProperty() {
         if (selected == null) {
             selected = new BooleanPropertyBase() {
-                @Override protected void invalidated() {
+                @Override public void invalidated() {
                     final Boolean v = get();
                     pseudoClassStateChanged(PSEUDO_CLASS_SELECTED, v);
 //                    accSendNotification(Attribute.SELECTED);

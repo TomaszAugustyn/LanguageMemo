@@ -84,7 +84,7 @@
                               </TableView>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="307.0" prefWidth="446.0">
+                        <AnchorPane fx:id="anchorPane" prefHeight="307.0" prefWidth="446.0">
                            <children>
                               <Region fx:id="addAndDeleteRegion" blendMode="COLOR_BURN" layoutX="11.0" layoutY="10.0" opacity="0.51" prefHeight="167.0" prefWidth="428.0" style="-fx-background-color: seagreen;">
                                  <effect>

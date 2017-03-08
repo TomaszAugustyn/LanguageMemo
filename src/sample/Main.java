@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -39,6 +43,7 @@ public class Main extends Application {
     @FXML private TableColumn<WordEntry, String> translationColumn;
     @FXML private Region addAndDeleteRegion;
     @FXML private ToggleSwitch toggle;
+    @FXML private AnchorPane anchorPane;
 
 
     @Override
@@ -57,7 +62,23 @@ public class Main extends Application {
         }
         getWordEntryListFromFile(loadedFile);
         fillTable(wordEntryList);
-        toggle = new ToggleSwitch("preview", "insert");
+
+        toggle.setTurnOnText("selected");
+        toggle.setTurnOffText("deselected");
+
+        toggle.setOnMouseClicked(t -> {
+            if (toggle.isSelected()){
+                System.out.println("selected");
+
+            }
+            else {
+                System.out.println("deselected");
+
+            }
+            t.consume();
+
+        });
+
         //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -139,6 +160,18 @@ public class Main extends Application {
             translationField.clear();
         }
     }
+
+    /*public void onToggleClicked(ActionEvent actionEvent) {
+        toggle.fire();
+        if (toggle.isSelected()){
+            toggle.setSelected(false);
+            //toggle.fire();
+        }
+        else {
+            toggle.setSelected(true);
+            //toggle.fire();
+        }
+    }*/
 
 
     private void getWordEntryListFromFile(File file) throws FileNotFoundException {
