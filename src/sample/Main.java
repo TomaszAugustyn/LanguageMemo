@@ -1,24 +1,18 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import jfxtras.styles.jmetro8.ToggleSwitch;
 
 import java.io.*;
@@ -43,7 +37,6 @@ public class Main extends Application {
     @FXML private TableColumn<WordEntry, String> translationColumn;
     @FXML private Region addAndDeleteRegion;
     @FXML private ToggleSwitch toggle;
-    @FXML private AnchorPane anchorPane;
 
 
     @Override
@@ -69,27 +62,22 @@ public class Main extends Application {
         toggle.setOnMouseClicked(t -> {
             if (toggle.isSelected()){
                 System.out.println("selected");
-
             }
             else {
                 System.out.println("deselected");
-
             }
             t.consume();
-
         });
 
         //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent we) {
-                String currentFilePath = filePath.getText();
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save changes to \"" + currentFilePath +"\"?", ButtonType.YES, ButtonType.NO);
-                alert.showAndWait();
+        stage.setOnCloseRequest(we -> {
+            String currentFilePath = filePath.getText();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save changes to \"" + currentFilePath +"\"?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
 
-                if(alert.getResult() == ButtonType.YES) {
-                    WriteFileFromWordEntryList(loadedFile);
-                }
+            if(alert.getResult() == ButtonType.YES) {
+                WriteFileFromWordEntryList(loadedFile);
             }
         });
 
@@ -161,19 +149,6 @@ public class Main extends Application {
         }
     }
 
-    /*public void onToggleClicked(ActionEvent actionEvent) {
-        toggle.fire();
-        if (toggle.isSelected()){
-            toggle.setSelected(false);
-            //toggle.fire();
-        }
-        else {
-            toggle.setSelected(true);
-            //toggle.fire();
-        }
-    }*/
-
-
     private void getWordEntryListFromFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream(file));
         String line = "";
@@ -226,5 +201,4 @@ public class Main extends Application {
     }
 
 }
-
 
