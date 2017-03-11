@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,14 +60,12 @@ public class Main extends Application {
 
         toggle.setOnMouseClicked(t -> {
             if (toggle.isSelected()){
-                System.out.println("selected");
                 toggle.setText("Add mode");
                 toggle.setStyle("-fx-base: limegreen");
                 addWordBtn.setDisable(false);
                 deleteWordBtn.setDisable(true);
             }
             else {
-                System.out.println("deselected");
                 toggle.setText("Delete mode");
                 toggle.setStyle("-fx-base:  #ff4855");
                 addWordBtn.setDisable(true);
