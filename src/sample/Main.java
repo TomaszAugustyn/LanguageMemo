@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro8.ToggleSwitch;
+import org.controlsfx.control.ToggleSwitch;
 
 import java.io.*;
 import java.util.*;
@@ -41,13 +42,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader().getResource("sample/NastiaMemo.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader().getResource("sample/resources/NastiaMemo.fxml"));
         loader.setController(this);
         root = loader.load();
         scene = new Scene(root);
         stage.setTitle("NastiaMemo");
         stage.setScene(scene);
         stage.show();
+        scene.getStylesheets().add("sample/resources/mySwitch.css");
+
         initTable();
         loadedFile = new File(System.getProperty("user.dir") + "\\LanguageMemo.txt");
         if (!loadedFile.exists()) {
@@ -56,15 +59,20 @@ public class Main extends Application {
         getWordEntryListFromFile(loadedFile);
         fillTable(wordEntryList);
 
-        toggle.setTurnOnText("selected");
-        toggle.setTurnOffText("deselected");
-
         toggle.setOnMouseClicked(t -> {
             if (toggle.isSelected()){
                 System.out.println("selected");
+                toggle.setText("Add mode");
+                toggle.setStyle("-fx-base: limegreen");
+                addWordBtn.setDisable(false);
+                deleteWordBtn.setDisable(true);
             }
             else {
                 System.out.println("deselected");
+                toggle.setText("Delete mode");
+                toggle.setStyle("-fx-base:  #ff4855");
+                addWordBtn.setDisable(true);
+                deleteWordBtn.setDisable(false);
             }
             t.consume();
         });

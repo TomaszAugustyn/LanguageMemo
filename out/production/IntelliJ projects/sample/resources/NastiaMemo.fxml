@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import jfxtras.styles.jmetro8.ToggleSwitch?>
+<?import org.controlsfx.control.ToggleSwitch?>
 
 <VBox prefHeight="476.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1">
   <children>
@@ -90,14 +90,13 @@
                                  <effect>
                                     <Blend />
                                  </effect></Region>
-                              <Button fx:id="deleteWordBtn" layoutX="194.0" layoutY="108.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #ff4855; -fx-border-color: black;" text="Delete Word" />
+                              <Button fx:id="deleteWordBtn" disable="true" layoutX="194.0" layoutY="108.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #ff4855; -fx-border-color: black;" text="Delete Word" />
                               <Button fx:id="addWordBtn" layoutX="194.0" layoutY="56.0" mnemonicParsing="false" onAction="#onAddWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: limegreen; -fx-border-color: black;" text="Add Word" />
                               <TextField fx:id="wordField" layoutX="24.0" layoutY="56.0" prefHeight="25.0" prefWidth="142.0" />
                               <TextField fx:id="translationField" layoutX="24.0" layoutY="116.0" prefHeight="25.0" prefWidth="142.0" />
                               <Label layoutX="24.0" layoutY="34.0" text="English word:" />
                               <Label layoutX="24.0" layoutY="96.0" text="Translation:" />
-                              <ToggleSwitch fx:id="toggle" layoutX="196.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" style="-fx-base: limegreen;" text="ToggleButton" turnOffText="Off" turnOnText="On">
-                              </ToggleSwitch>
+                              <ToggleSwitch fx:id="toggle" layoutX="197.0" layoutY="21.0" prefHeight="27.0" prefWidth="107.0" selected="true" style="-fx-base: limegreen;" text="Add mode" />
                            </children>
                         </AnchorPane>
                      </items></SplitPane>
