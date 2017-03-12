@@ -1,1 +1,1 @@
-rope,lina;shoes,buty;phone,telefon;hi,siema;
+rope,lina;shoes,buty;phone,telefon;hi,siema;bread,chleb;

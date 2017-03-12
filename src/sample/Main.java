@@ -24,6 +24,7 @@ public class Main extends Application {
     private Parent root;
     private Scene scene;
     private WordEntryList wordEntryList;
+    private WordEntryList initialWordEntryList;
     private ObservableList<WordEntry> data;
     private File loadedFile;
     @FXML private TextField filePath;
@@ -55,9 +56,38 @@ public class Main extends Application {
         if (!loadedFile.exists()) {
             loadedFile.createNewFile();
         }
-        getWordEntryListFromFile(loadedFile);
+        wordEntryList = getWordEntryListFromFile(loadedFile);
+        initialWordEntryList = getWordEntryListFromFile(loadedFile);
         fillTable(wordEntryList);
 
+        setToggleSwitchOnMouseClicked();
+        //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
+
+        stage.setOnCloseRequest(we -> {
+            if(!wordEntryList.equals(initialWordEntryList))
+            {
+                String currentFilePath = filePath.getText();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save changes to \"" + currentFilePath +"\"?", ButtonType.YES, ButtonType.NO);
+                alert.showAndWait();
+
+                if(alert.getResult() == ButtonType.YES) {
+                    WriteFileFromWordEntryList(loadedFile);
+                }
+            }
+
+        });
+
+    }
+
+    public static void main(String[] args) {
+
+        launch(args);
+        System.out.println("Working Directory = " +
+                System.getProperty("user.dir") );
+
+    }
+
+    private void setToggleSwitchOnMouseClicked() {
         toggle.setOnMouseClicked(t -> {
             if (toggle.isSelected()){
                 toggle.setText("Add mode");
@@ -73,27 +103,6 @@ public class Main extends Application {
             }
             t.consume();
         });
-
-        //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
-
-        stage.setOnCloseRequest(we -> {
-            String currentFilePath = filePath.getText();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save changes to \"" + currentFilePath +"\"?", ButtonType.YES, ButtonType.NO);
-            alert.showAndWait();
-
-            if(alert.getResult() == ButtonType.YES) {
-                WriteFileFromWordEntryList(loadedFile);
-            }
-        });
-
-    }
-
-    public static void main(String[] args) {
-
-        launch(args);
-        System.out.println("Working Directory = " +
-                System.getProperty("user.dir") );
-
     }
 
     private void WriteFileFromWordEntryList(File loadedFile) {
@@ -120,7 +129,7 @@ public class Main extends Application {
         chooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
         try {
             loadedFile = chooser.showOpenDialog(scene.getWindow());
-            getWordEntryListFromFile(loadedFile);
+            wordEntryList = getWordEntryListFromFile(loadedFile);
             fillTable(wordEntryList);
         }
         catch(NullPointerException e) {
@@ -154,10 +163,10 @@ public class Main extends Application {
         }
     }
 
-    private void getWordEntryListFromFile(File file) throws FileNotFoundException {
+    private WordEntryList getWordEntryListFromFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream(file));
         String line = "";
-        wordEntryList = new WordEntryList();
+        WordEntryList wordEntryListLocal = new WordEntryList();
 
         while (scanner.hasNextLine()) {
             line = scanner.nextLine();
@@ -167,7 +176,7 @@ public class Main extends Application {
                     if(s.contains(",")){
                         List<String> comaList = new ArrayList<String>(Arrays.asList(s.split(",")));
                         WordEntry wordEntry = new WordEntry(comaList.get(0), comaList.get(1));
-                        wordEntryList.addWord(wordEntry);
+                        wordEntryListLocal.addWord(wordEntry);
                     }
                 }
             }
@@ -175,6 +184,8 @@ public class Main extends Application {
         }
         System.out.println("Chosen: " + file.getAbsolutePath());
         filePath.setText(file.getAbsolutePath());
+
+        return wordEntryListLocal;
 
     }
 

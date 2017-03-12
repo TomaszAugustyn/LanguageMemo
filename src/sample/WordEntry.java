@@ -34,10 +34,29 @@ public class WordEntry {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WordEntry)) return false;
+
+        WordEntry wordEntry = (WordEntry) o;
+
+        if (!getWord().equals(wordEntry.getWord())) return false;
+        return getTranslation().equals(wordEntry.getTranslation());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getWord().hashCode();
+        result = 31 * result + getTranslation().hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "WordEntry{" +
                 "word=" + word +
                 ", translation=" + translation +
                 '}';
+
     }
 }

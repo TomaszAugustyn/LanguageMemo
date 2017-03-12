@@ -61,4 +61,19 @@ public class WordEntryList {
                 "wordsList=" + wordsList +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WordEntryList)) return false;
+
+        WordEntryList that = (WordEntryList) o;
+
+        return getWordsList().equals(that.getWordsList());
+    }
+
+    @Override
+    public int hashCode() {
+        return getWordsList().hashCode();
+    }
 }
