@@ -63,6 +63,14 @@ public class Main extends Application {
         setToggleSwitchOnMouseClicked();
         //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
+        table.setOnMouseClicked(mc -> {
+            if(!toggle.isSelected()){
+                WordEntry wordEntry = table.getSelectionModel().getSelectedItem();
+                wordField.setText(wordEntry.getWord());
+                translationField.setText(wordEntry.getTranslation());
+            }
+        });
+
         stage.setOnCloseRequest(we -> {
             if(!wordEntryList.equals(initialWordEntryList))
             {
@@ -82,9 +90,6 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         launch(args);
-        System.out.println("Working Directory = " +
-                System.getProperty("user.dir") );
-
     }
 
     private void setToggleSwitchOnMouseClicked() {
@@ -101,6 +106,8 @@ public class Main extends Application {
                 addWordBtn.setDisable(true);
                 deleteWordBtn.setDisable(false);
             }
+            wordField.clear();
+            translationField.clear();
             t.consume();
         });
     }
@@ -163,6 +170,34 @@ public class Main extends Application {
         }
     }
 
+    public void onDeleteWordBtnClicked(ActionEvent actionEvent){
+        String word = wordField.getText();
+        String translation = translationField.getText();
+        WordEntry wordEntry = new WordEntry(word, translation);
+
+        if(word.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word field must not be empty. Click on the table to load a word entry.", ButtonType.OK);
+            alert.showAndWait();
+
+        }
+        else if(translation.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Translation field must not be empty. Click on the table to load a word entry.", ButtonType.OK);
+            alert.showAndWait();
+        }
+        else if(wordEntryList.isWordEntryOnList(wordEntry)){
+            wordEntryList.deleteWord(wordEntry);
+            fillTable(wordEntryList);
+            wordField.clear();
+            translationField.clear();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The word entry you want to delete doesn't exist in your dictionary.", ButtonType.OK);
+            alert.showAndWait();
+            wordField.clear();
+            translationField.clear();
+        }
+    }
+
     private WordEntryList getWordEntryListFromFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream(file));
         String line = "";
@@ -184,6 +219,7 @@ public class Main extends Application {
         }
         System.out.println("Chosen: " + file.getAbsolutePath());
         filePath.setText(file.getAbsolutePath());
+        fileChooser.requestFocus();
 
         return wordEntryListLocal;
 
@@ -215,6 +251,7 @@ public class Main extends Application {
         );
 
     }
+
 
 }
 

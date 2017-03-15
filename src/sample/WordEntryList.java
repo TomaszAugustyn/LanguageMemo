@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,12 +32,21 @@ public class WordEntryList {
         }
     }
 
-    public WordEntry getWordEntry(String word){
-        for (WordEntry w : wordsList) {
-            if (w.getWord().equals(word))
-                return w;
+    public void deleteWord(WordEntry wordEntry){
+        for (Iterator<WordEntry> iter = wordsList.listIterator(); iter.hasNext(); ) {
+            WordEntry w = iter.next();
+            if (wordEntry.equals(w)) {
+                iter.remove();
+            }
         }
-        return new WordEntry("", "");
+    }
+
+    public boolean isWordEntryOnList(WordEntry wordEntry){
+        for (WordEntry w : wordsList) {
+            if (wordEntry.equals(w))
+                return true;
+        }
+        return false;
     }
 
     public WordEntryList(List<WordEntry> wordsList) {
