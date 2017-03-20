@@ -49,6 +49,10 @@ public class WordEntryList {
         return false;
     }
 
+    public long getCount(){
+        return (long)wordsList.size();
+    }
+
     public WordEntryList(List<WordEntry> wordsList) {
         this.wordsList = wordsList;
     }

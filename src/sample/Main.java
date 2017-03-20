@@ -38,6 +38,7 @@ public class Main extends Application {
     @FXML private TableColumn<WordEntry, String> translationColumn;
     @FXML private Region addAndDeleteRegion;
     @FXML private ToggleSwitch toggle;
+    @FXML private Label label;
 
 
     @Override
@@ -59,6 +60,7 @@ public class Main extends Application {
         wordEntryList = getWordEntryListFromFile(loadedFile);
         initialWordEntryList = getWordEntryListFromFile(loadedFile);
         fillTable(wordEntryList);
+        recalculateWordsCounter();
 
         setToggleSwitchOnMouseClicked();
         //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
@@ -82,7 +84,6 @@ public class Main extends Application {
                     WriteFileFromWordEntryList(loadedFile);
                 }
             }
-
         });
 
     }
@@ -138,6 +139,7 @@ public class Main extends Application {
             loadedFile = chooser.showOpenDialog(scene.getWindow());
             wordEntryList = getWordEntryListFromFile(loadedFile);
             fillTable(wordEntryList);
+            recalculateWordsCounter();
         }
         catch(NullPointerException e) {
             e.printStackTrace();
@@ -167,6 +169,7 @@ public class Main extends Application {
             fillTable(wordEntryList);
             wordField.clear();
             translationField.clear();
+            recalculateWordsCounter();
         }
     }
 
@@ -189,6 +192,7 @@ public class Main extends Application {
             fillTable(wordEntryList);
             wordField.clear();
             translationField.clear();
+            recalculateWordsCounter();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "The word entry you want to delete doesn't exist in your dictionary.", ButtonType.OK);
@@ -196,6 +200,12 @@ public class Main extends Application {
             wordField.clear();
             translationField.clear();
         }
+    }
+
+    private void recalculateWordsCounter(){
+        long lCounter = wordEntryList.getCount();
+        label.setText("  Your dictionary has:\n" + Long.toString(lCounter) + " entries");
+
     }
 
     private WordEntryList getWordEntryListFromFile(File file) throws FileNotFoundException {

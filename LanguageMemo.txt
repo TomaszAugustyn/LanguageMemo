@@ -1,1 +1,1 @@
-rope,lina;shoes,buty;phone,telefon;hi,siema;213123,123123;
+rope,lina;shoes,buty;phone,telefon;hi,siema;
