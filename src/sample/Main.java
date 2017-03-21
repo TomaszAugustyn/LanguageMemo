@@ -28,7 +28,9 @@ public class Main extends Application {
     private ObservableList<WordEntry> data;
     private File loadedFile;
     @FXML private TextField filePath;
-    @FXML private TextField wordField;
+    //@FXML private TextField wordField;
+
+    @FXML private AutoCompleteTextField wordField;
     @FXML private TextField translationField;
     @FXML private Button fileChooser;
     @FXML private Button deleteWordBtn;
@@ -61,8 +63,8 @@ public class Main extends Application {
         initialWordEntryList = getWordEntryListFromFile(loadedFile);
         fillTable(wordEntryList);
         recalculateWordsCounter();
-
         setToggleSwitchOnMouseClicked();
+        wordField.getEntries().addAll(Arrays.asList("aa", "af", "Afe","a", "aase", "aefa"));
         //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
         table.setOnMouseClicked(mc -> {

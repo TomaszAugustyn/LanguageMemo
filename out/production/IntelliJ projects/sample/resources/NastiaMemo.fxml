@@ -21,6 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
+<?import sample.AutoCompleteTextField?>
 <VBox prefHeight="476.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1">
   <children>
       <AmbientLight color="CHARTREUSE" lightOn="true" />
@@ -73,19 +74,22 @@
          <tabs>
             <Tab text="Words Database">
                <content>
-                  <SplitPane dividerPositions="0.35" prefHeight="307.0" prefWidth="288.0">
+                  <SplitPane dividerPositions="0.35014005602240894" prefHeight="307.0" prefWidth="288.0">
                      <items>
-                        <AnchorPane prefHeight="307.0" prefWidth="217.0">
+                        <AnchorPane prefHeight="340.0" prefWidth="228.0">
                            <children>
-                              <TableView fx:id="table" prefHeight="337.0" prefWidth="248.0">
+                              <TableView fx:id="table" cacheShape="false" prefHeight="337.0" prefWidth="268.0">
                                 <columns>
                                   <TableColumn fx:id="wordColumn" prefWidth="125.0" text="Word" />
                                   <TableColumn fx:id="translationColumn" prefWidth="122.0" text="Translation" />
                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                               </TableView>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="307.0" prefWidth="446.0">
+                        <AnchorPane prefHeight="340.0" prefWidth="493.0">
                            <children>
                               <Region fx:id="addAndDeleteRegion" blendMode="COLOR_BURN" layoutX="11.0" layoutY="10.0" opacity="0.51" prefHeight="167.0" prefWidth="428.0" style="-fx-background-color: seagreen;">
                                  <effect>
@@ -93,7 +97,7 @@
                                  </effect></Region>
                               <Button fx:id="deleteWordBtn" disable="true" layoutX="194.0" layoutY="108.0" mnemonicParsing="false" onAction="#onDeleteWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #ff4855; -fx-border-color: black;" text="Delete Word" />
                               <Button fx:id="addWordBtn" layoutX="194.0" layoutY="56.0" mnemonicParsing="false" onAction="#onAddWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: limegreen; -fx-border-color: black;" text="Add Word" />
-                              <TextField fx:id="wordField" layoutX="24.0" layoutY="56.0" prefHeight="25.0" prefWidth="142.0" />
+                              <AutoCompleteTextField fx:id="wordField" layoutX="24.0" layoutY="56.0" prefHeight="25.0" prefWidth="142.0" />
                               <TextField fx:id="translationField" layoutX="24.0" layoutY="116.0" prefHeight="25.0" prefWidth="142.0" />
                               <Label layoutX="24.0" layoutY="34.0" text="English word:" />
                               <Label layoutX="24.0" layoutY="96.0" text="Translation:" />
