@@ -6,6 +6,9 @@ import javafx.scene.control.ButtonType;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tomek on 11.02.2017.
@@ -51,6 +54,18 @@ public class WordEntryList {
 
     public long getCount(){
         return (long)wordsList.size();
+    }
+
+    public List<String> getWordsAsList(){
+        return getWordsList().stream()
+                            .map( wordEntry -> wordEntry.getWord())
+                            .collect(Collectors.toList());
+    }
+
+    public List<String> getTranslationsAsList(){
+        return getWordsList().stream()
+                .map( wordEntry -> wordEntry.getTranslation())
+                .collect(Collectors.toList());
     }
 
     public WordEntryList(List<WordEntry> wordsList) {

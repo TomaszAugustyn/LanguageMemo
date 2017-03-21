@@ -98,7 +98,7 @@
                               <Button fx:id="deleteWordBtn" disable="true" layoutX="194.0" layoutY="108.0" mnemonicParsing="false" onAction="#onDeleteWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #ff4855; -fx-border-color: black;" text="Delete Word" />
                               <Button fx:id="addWordBtn" layoutX="194.0" layoutY="56.0" mnemonicParsing="false" onAction="#onAddWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: limegreen; -fx-border-color: black;" text="Add Word" />
                               <AutoCompleteTextField fx:id="wordField" layoutX="24.0" layoutY="56.0" prefHeight="25.0" prefWidth="142.0" />
-                              <TextField fx:id="translationField" layoutX="24.0" layoutY="116.0" prefHeight="25.0" prefWidth="142.0" />
+                              <AutoCompleteTextField fx:id="translationField" layoutX="24.0" layoutY="116.0" prefHeight="25.0" prefWidth="142.0" />
                               <Label layoutX="24.0" layoutY="34.0" text="English word:" />
                               <Label layoutX="24.0" layoutY="96.0" text="Translation:" />
                               <ToggleSwitch fx:id="toggle" layoutX="197.0" layoutY="21.0" prefHeight="27.0" prefWidth="107.0" selected="true" style="-fx-base: limegreen;" text="Add mode" />

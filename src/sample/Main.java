@@ -31,7 +31,7 @@ public class Main extends Application {
     //@FXML private TextField wordField;
 
     @FXML private AutoCompleteTextField wordField;
-    @FXML private TextField translationField;
+    @FXML private AutoCompleteTextField translationField;
     @FXML private Button fileChooser;
     @FXML private Button deleteWordBtn;
     @FXML private Button addWordBtn;
@@ -61,17 +61,18 @@ public class Main extends Application {
         }
         wordEntryList = getWordEntryListFromFile(loadedFile);
         initialWordEntryList = getWordEntryListFromFile(loadedFile);
-        fillTable(wordEntryList);
-        recalculateWordsCounter();
+        afterWordsListChanged();
         setToggleSwitchOnMouseClicked();
-        wordField.getEntries().addAll(Arrays.asList("aa", "af", "Afe","a", "aase", "aefa"));
         //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
         table.setOnMouseClicked(mc -> {
             if(!toggle.isSelected()){
                 WordEntry wordEntry = table.getSelectionModel().getSelectedItem();
                 wordField.setText(wordEntry.getWord());
+                wordField.hidePopup();
                 translationField.setText(wordEntry.getTranslation());
+                translationField.hidePopup();
+
             }
         });
 
@@ -88,6 +89,15 @@ public class Main extends Application {
             }
         });
 
+    }
+
+    private void afterWordsListChanged() {
+        fillTable(wordEntryList);
+        recalculateWordsCounter();
+        wordField.clearEntries();
+        wordField.getEntries().addAll(wordEntryList.getWordsAsList());
+        translationField.clearEntries();
+        translationField.getEntries().addAll(wordEntryList.getTranslationsAsList());
     }
 
     public static void main(String[] args) {
@@ -140,8 +150,7 @@ public class Main extends Application {
         try {
             loadedFile = chooser.showOpenDialog(scene.getWindow());
             wordEntryList = getWordEntryListFromFile(loadedFile);
-            fillTable(wordEntryList);
-            recalculateWordsCounter();
+            afterWordsListChanged();
         }
         catch(NullPointerException e) {
             e.printStackTrace();
@@ -168,10 +177,9 @@ public class Main extends Application {
         }
         else{
             wordEntryList.addWord(new WordEntry(word, translation));
-            fillTable(wordEntryList);
+            afterWordsListChanged();
             wordField.clear();
             translationField.clear();
-            recalculateWordsCounter();
         }
     }
 
@@ -191,10 +199,9 @@ public class Main extends Application {
         }
         else if(wordEntryList.isWordEntryOnList(wordEntry)){
             wordEntryList.deleteWord(wordEntry);
-            fillTable(wordEntryList);
+            afterWordsListChanged();
             wordField.clear();
             translationField.clear();
-            recalculateWordsCounter();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "The word entry you want to delete doesn't exist in your dictionary.", ButtonType.OK);

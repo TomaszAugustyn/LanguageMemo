@@ -79,6 +79,20 @@ public class AutoCompleteTextField extends TextField
     public SortedSet<String> getEntries() { return entries; }
 
     /**
+     * Remove the existing set of autocomplete entries.
+     */
+    public void clearEntries(){
+        this.entries.clear();
+    }
+
+    /**
+     * Hide entries popup
+     */
+    public void hidePopup(){
+        entriesPopup.hide();
+    }
+
+    /**
      * Populate the entry set with the given search results.  Display is limited to 10 entries, for performance.
      * @param searchResult The set of matching strings.
      */
