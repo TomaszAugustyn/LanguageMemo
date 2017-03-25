@@ -10,10 +10,7 @@ import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -26,6 +23,31 @@ public class AutoCompleteTextField extends TextField
     private final SortedSet<String> entries;
     /** The popup used to select an entry. */
     private ContextMenu entriesPopup;
+
+
+    /**
+     * Event Listener to notify that specified entry has been selected from search list.
+     * added by: Tomasz Augustyn
+     */
+    private List _listeners = new ArrayList();
+    public synchronized void addEventListener(AutoCompleteSelectedEventListener listener) {
+        _listeners.add(listener);
+    }
+    public synchronized void removeEventListener(AutoCompleteSelectedEventListener listener)   {
+        _listeners.remove(listener);
+    }
+
+    /**
+     * call this method whenever you want to notify the event listeners of the particular event
+     * added by: Tomasz Augustyn
+     */
+    private synchronized void fireEvent(String selectedText) {
+        AutoCompleteSelectedEvent event = new AutoCompleteSelectedEvent(this);
+        Iterator i = _listeners.iterator();
+        while(i.hasNext())  {
+            ((AutoCompleteSelectedEventListener) i.next()).handleAutoCompleteSelected(event, selectedText);
+        }
+    }
 
     /** Construct a new AutoCompleteTextField. */
     public AutoCompleteTextField() {
@@ -80,6 +102,7 @@ public class AutoCompleteTextField extends TextField
 
     /**
      * Remove the existing set of autocomplete entries.
+     * added by: Tomasz Augustyn
      */
     public void clearEntries(){
         this.entries.clear();
@@ -87,6 +110,7 @@ public class AutoCompleteTextField extends TextField
 
     /**
      * Hide entries popup
+     * added by: Tomasz Augustyn
      */
     public void hidePopup(){
         entriesPopup.hide();
@@ -111,6 +135,7 @@ public class AutoCompleteTextField extends TextField
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     setText(result);
+                    fireEvent(result);
                     entriesPopup.hide();
                 }
             });

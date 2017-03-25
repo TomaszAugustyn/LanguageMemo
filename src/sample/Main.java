@@ -19,6 +19,11 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+/**
+ * App for creating language memos supporting learining new words (JavaFX).
+ * @author Tomasz Augustyn
+ */
 public class Main extends Application {
 
     private Parent root;
@@ -27,9 +32,8 @@ public class Main extends Application {
     private WordEntryList initialWordEntryList;
     private ObservableList<WordEntry> data;
     private File loadedFile;
-    @FXML private TextField filePath;
-    //@FXML private TextField wordField;
 
+    @FXML private TextField filePath;
     @FXML private AutoCompleteTextField wordField;
     @FXML private AutoCompleteTextField translationField;
     @FXML private Button fileChooser;
@@ -88,6 +92,26 @@ public class Main extends Application {
                 }
             }
         });
+
+        class WordAutoCompleteListener implements AutoCompleteSelectedEventListener {
+
+            //implement the required method(s) of the interface
+            public void handleAutoCompleteSelected(EventObject e, String selectedText){
+                System.out.println("word completed");
+
+            }
+        }
+
+        class TranslationAutoCompleteListener implements AutoCompleteSelectedEventListener {
+
+            //implement the required method(s) of the interface
+            public void handleAutoCompleteSelected(EventObject e, String selectedText){
+                System.out.println("translation completed");
+            }
+        }
+
+        wordField.addEventListener(new WordAutoCompleteListener());
+        translationField.addEventListener(new TranslationAutoCompleteListener());
 
     }
 

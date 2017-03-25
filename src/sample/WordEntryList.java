@@ -6,12 +6,11 @@ import javafx.scene.control.ButtonType;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.StringJoiner;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
- * Created by Tomek on 11.02.2017.
+ * This is WordEntryList class that manages word and translation entries used in the application
+ * @author Tomasz Augustyn
  */
 public class WordEntryList {
 

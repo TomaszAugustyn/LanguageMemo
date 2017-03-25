@@ -4,7 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * Created by Tomek on 11.02.2017.
+ * This is WordEntry class that manages word and translation strings
+ * @author Tomasz Augustyn
  */
 public class WordEntry {
 
