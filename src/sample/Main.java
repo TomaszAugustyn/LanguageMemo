@@ -97,8 +97,11 @@ public class Main extends Application {
 
             //implement the required method(s) of the interface
             public void handleAutoCompleteSelected(EventObject e, String selectedText){
-                System.out.println("word completed");
-
+                if(!toggle.isSelected()){
+                    String translation = wordEntryList.getEntryEquivalent(selectedText, WordEntryList.eEntries.WORD);
+                    translationField.setText(translation);
+                    translationField.hidePopup();
+                }
             }
         }
 
@@ -106,7 +109,11 @@ public class Main extends Application {
 
             //implement the required method(s) of the interface
             public void handleAutoCompleteSelected(EventObject e, String selectedText){
-                System.out.println("translation completed");
+                if(!toggle.isSelected()){
+                    String word = wordEntryList.getEntryEquivalent(selectedText, WordEntryList.eEntries.TRANSLATION);
+                    wordField.setText(word);
+                    wordField.hidePopup();
+                }
             }
         }
 

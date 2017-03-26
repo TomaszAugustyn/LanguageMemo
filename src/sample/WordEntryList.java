@@ -16,6 +16,10 @@ public class WordEntryList {
 
     private List<WordEntry> wordsList = new ArrayList<>();
 
+    public static enum eEntries{
+        WORD, TRANSLATION
+    }
+
     public void addWord(WordEntry wordEntry){
         if(!wordEntry.getWord().isEmpty() &&
                 !wordEntry.getTranslation().isEmpty())
@@ -65,6 +69,32 @@ public class WordEntryList {
         return getWordsList().stream()
                 .map( wordEntry -> wordEntry.getTranslation())
                 .collect(Collectors.toList());
+    }
+
+    public String getEntryEquivalent(String wordOrTranslation, eEntries entryType){
+
+        switch(entryType){
+            case WORD:
+                for (WordEntry wordEntry : this.wordsList) {
+                    if(wordOrTranslation.equals(wordEntry.getWord()))
+                    {
+                        return wordEntry.getTranslation();
+                    }
+                }
+                break;
+            case TRANSLATION:
+                for (WordEntry wordEntry : this.wordsList) {
+                    if(wordOrTranslation.equals(wordEntry.getTranslation()))
+                    {
+                        return wordEntry.getWord();
+                    }
+                }
+                break;
+            default:
+                return "";
+        }
+
+        return "";
     }
 
     public WordEntryList(List<WordEntry> wordsList) {
