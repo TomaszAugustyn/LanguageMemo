@@ -125,10 +125,16 @@ public class Main extends Application {
     private void afterWordsListChanged() {
         fillTable(wordEntryList);
         recalculateWordsCounter();
-        wordField.clearEntries();
-        wordField.getEntries().addAll(wordEntryList.getWordsAsList());
-        translationField.clearEntries();
-        translationField.getEntries().addAll(wordEntryList.getTranslationsAsList());
+        if(toggle.isSelected()){
+            wordField.clearEntries();
+            translationField.clearEntries();
+        }
+        else{
+            wordField.clearEntries();
+            translationField.clearEntries();
+            wordField.getEntries().addAll(wordEntryList.getWordsAsList());
+            translationField.getEntries().addAll(wordEntryList.getTranslationsAsList());
+        }
     }
 
     public static void main(String[] args) {
@@ -143,12 +149,17 @@ public class Main extends Application {
                 toggle.setStyle("-fx-base: limegreen");
                 addWordBtn.setDisable(false);
                 deleteWordBtn.setDisable(true);
+                wordField.clearEntries();   //AutoComplete popup disabled
+                translationField.clearEntries();    //AutoComplete popup disabled
+
             }
             else {
                 toggle.setText("Delete mode");
                 toggle.setStyle("-fx-base:  #ff4855");
                 addWordBtn.setDisable(true);
                 deleteWordBtn.setDisable(false);
+                wordField.getEntries().addAll(wordEntryList.getWordsAsList());  //AutoComplete popup enabled
+                translationField.getEntries().addAll(wordEntryList.getTranslationsAsList());    //AutoComplete popup enabled
             }
             wordField.clear();
             translationField.clear();
