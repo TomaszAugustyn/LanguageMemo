@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.ToggleSwitch?>
+<?import sample.AutoCompleteTextField?>
+
+<SplitPane dividerPositions="0.35014005602240894" prefHeight="307.0" prefWidth="288.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.TabWordsController">
+<items>
+    <AnchorPane prefHeight="340.0" prefWidth="228.0">
+        <children>
+            <TableView fx:id="table" cacheShape="false" prefHeight="337.0" prefWidth="268.0">
+                <columns>
+                    <TableColumn fx:id="wordColumn" prefWidth="125.0" text="Word" />
+                    <TableColumn fx:id="translationColumn" prefWidth="122.0" text="Translation" />
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
+            </TableView>
+        </children>
+    </AnchorPane>
+    <AnchorPane prefHeight="340.0" prefWidth="493.0">
+        <children>
+            <Region fx:id="addAndDeleteRegion" blendMode="COLOR_BURN" layoutX="11.0" layoutY="10.0" opacity="0.51" prefHeight="167.0" prefWidth="428.0" style="-fx-background-color: seagreen;">
+                <effect>
+                    <Blend />
+                </effect></Region>
+            <Button fx:id="deleteWordBtn" disable="true" layoutX="194.0" layoutY="108.0" mnemonicParsing="false" onAction="#onDeleteWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #ff4855; -fx-border-color: black;" text="Delete Word" />
+            <Button fx:id="addWordBtn" layoutX="194.0" layoutY="56.0" mnemonicParsing="false" onAction="#onAddWordBtnClicked" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: limegreen; -fx-border-color: black;" text="Add Word" />
+            <AutoCompleteTextField fx:id="wordField" layoutX="24.0" layoutY="56.0" prefHeight="25.0" prefWidth="142.0" />
+            <AutoCompleteTextField fx:id="translationField" layoutX="24.0" layoutY="116.0" prefHeight="25.0" prefWidth="142.0" />
+            <Label layoutX="24.0" layoutY="34.0" text="English word:" />
+            <Label layoutX="24.0" layoutY="96.0" text="Translation:" />
+            <ToggleSwitch fx:id="toggle" layoutX="197.0" layoutY="21.0" prefHeight="27.0" prefWidth="107.0" selected="true" style="-fx-base: limegreen;" text="Add mode" />
+            <Label fx:id="label" layoutX="11.0" layoutY="190.0" prefHeight="128.0" prefWidth="429.0" text="Your dictionary has: XXX entries" textAlignment="CENTER" wrapText="true">
+                <font>
+                    <Font size="41.0" />
+                </font></Label>
+        </children>
+    </AnchorPane>
+</items></SplitPane>
