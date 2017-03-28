@@ -33,6 +33,7 @@ public class Main extends Application {
     private ObservableList<WordEntry> data;
     private File loadedFile;
 
+    @FXML private TabLearningController tabLearningController;
     @FXML private TextField filePath;
     @FXML private AutoCompleteTextField wordField;
     @FXML private AutoCompleteTextField translationField;
@@ -47,6 +48,7 @@ public class Main extends Application {
     @FXML private Label label;
 
 
+
     @Override
     public void start(Stage stage) throws Exception{
         FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader().getResource("sample/resources/NastiaMemo.fxml"));
@@ -57,6 +59,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         scene.getStylesheets().add("sample/resources/mySwitch.css");
+        tabLearningController.init(this);
 
         initTable();
         loadedFile = new File(System.getProperty("user.dir") + "\\LanguageMemo.txt");
@@ -67,6 +70,8 @@ public class Main extends Application {
         initialWordEntryList = getWordEntryListFromFile(loadedFile);
         afterWordsListChanged();
         setToggleSwitchOnMouseClicked();
+        wordField.setPopupEnabled(false);   //program start in AddWord mode, so we disable the popup
+        translationField.setPopupEnabled(false);    //program start in AddWord mode, so we disable the popup
         //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
         table.setOnMouseClicked(mc -> {
@@ -96,24 +101,24 @@ public class Main extends Application {
         class WordAutoCompleteListener implements AutoCompleteSelectedEventListener {
 
             //implement the required method(s) of the interface
+            @Override
             public void handleAutoCompleteSelected(EventObject e, String selectedText){
-                if(!toggle.isSelected()){
-                    String translation = wordEntryList.getEntryEquivalent(selectedText, WordEntryList.eEntries.WORD);
-                    translationField.setText(translation);
-                    translationField.hidePopup();
-                }
+
+                String translation = wordEntryList.getEntryEquivalent(selectedText, WordEntryList.eEntries.WORD);
+                translationField.setText(translation);
+                translationField.hidePopup();
             }
         }
 
         class TranslationAutoCompleteListener implements AutoCompleteSelectedEventListener {
 
             //implement the required method(s) of the interface
+            @Override
             public void handleAutoCompleteSelected(EventObject e, String selectedText){
-                if(!toggle.isSelected()){
-                    String word = wordEntryList.getEntryEquivalent(selectedText, WordEntryList.eEntries.TRANSLATION);
-                    wordField.setText(word);
-                    wordField.hidePopup();
-                }
+
+                String word = wordEntryList.getEntryEquivalent(selectedText, WordEntryList.eEntries.TRANSLATION);
+                wordField.setText(word);
+                wordField.hidePopup();
             }
         }
 
@@ -125,16 +130,11 @@ public class Main extends Application {
     private void afterWordsListChanged() {
         fillTable(wordEntryList);
         recalculateWordsCounter();
-        if(toggle.isSelected()){
-            wordField.clearEntries();
-            translationField.clearEntries();
-        }
-        else{
-            wordField.clearEntries();
-            translationField.clearEntries();
-            wordField.getEntries().addAll(wordEntryList.getWordsAsList());
-            translationField.getEntries().addAll(wordEntryList.getTranslationsAsList());
-        }
+        wordField.clearEntries();
+        translationField.clearEntries();
+        wordField.getEntries().addAll(wordEntryList.getWordsAsList());
+        translationField.getEntries().addAll(wordEntryList.getTranslationsAsList());
+
     }
 
     public static void main(String[] args) {
@@ -149,8 +149,8 @@ public class Main extends Application {
                 toggle.setStyle("-fx-base: limegreen");
                 addWordBtn.setDisable(false);
                 deleteWordBtn.setDisable(true);
-                wordField.clearEntries();   //AutoComplete popup disabled
-                translationField.clearEntries();    //AutoComplete popup disabled
+                wordField.setPopupEnabled(false);
+                translationField.setPopupEnabled(false);
 
             }
             else {
@@ -158,8 +158,9 @@ public class Main extends Application {
                 toggle.setStyle("-fx-base:  #ff4855");
                 addWordBtn.setDisable(true);
                 deleteWordBtn.setDisable(false);
-                wordField.getEntries().addAll(wordEntryList.getWordsAsList());  //AutoComplete popup enabled
-                translationField.getEntries().addAll(wordEntryList.getTranslationsAsList());    //AutoComplete popup enabled
+                wordField.setPopupEnabled(true);
+                translationField.setPopupEnabled(true);
+
             }
             wordField.clear();
             translationField.clear();
@@ -311,6 +312,10 @@ public class Main extends Application {
                 new PropertyValueFactory<WordEntry,String>("Translation")
         );
 
+    }
+
+    public WordEntryList getWordEntryList(){
+        return this.wordEntryList;
     }
 
 

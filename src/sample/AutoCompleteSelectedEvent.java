@@ -4,7 +4,8 @@ package sample;
 import java.util.EventObject;
 
 /**
- * Created by Tomek on 25.03.2017.
+ * New event for listening when a position from search results in AutoCompleteTextField has been selected.
+ * @author Tomasz Augustyn
  */
 public class AutoCompleteSelectedEvent extends EventObject {
 

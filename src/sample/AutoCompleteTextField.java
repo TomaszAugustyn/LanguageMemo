@@ -23,7 +23,8 @@ public class AutoCompleteTextField extends TextField
     private final SortedSet<String> entries;
     /** The popup used to select an entry. */
     private ContextMenu entriesPopup;
-
+    /** Flag for enabling/disabling showing the popup. Added by: Tomasz Augustyn. */
+    private boolean enabledPopup = true;
 
     /**
      * Event Listener to notify that specified entry has been selected from search list.
@@ -71,7 +72,7 @@ public class AutoCompleteTextField extends TextField
                         if (entries.size() > 0)
                         {
                             populatePopup(searchResult);
-                            if (!entriesPopup.isShowing())
+                            if (!entriesPopup.isShowing() && enabledPopup)
                             {
                                 entriesPopup.show(AutoCompleteTextField.this, Side.BOTTOM, 0, 0);
                             }
@@ -115,6 +116,15 @@ public class AutoCompleteTextField extends TextField
     public void hidePopup(){
         entriesPopup.hide();
     }
+
+    /**
+     * Method for Enabling/Disabling showing the popup.
+     * added by: Tomasz Augustyn
+     */
+    public void setPopupEnabled(boolean enablePopup) {
+        this.enabledPopup = enablePopup;
+    }
+
 
     /**
      * Populate the entry set with the given search results.  Display is limited to 10 entries, for performance.

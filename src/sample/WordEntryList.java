@@ -72,7 +72,6 @@ public class WordEntryList {
     }
 
     public String getEntryEquivalent(String wordOrTranslation, eEntries entryType){
-
         switch(entryType){
             case WORD:
                 for (WordEntry wordEntry : this.wordsList) {

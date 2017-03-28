@@ -111,7 +111,10 @@
                      </items></SplitPane>
                </content>
             </Tab>
-            <Tab text="Learning" />
+             <Tab closable="false" text="Learning">
+                 <content>
+                     <fx:include fx:id="tabLearning" source="TabLearning.fxml" />
+                 </content></Tab>
          </tabs>
       </TabPane>
   </children>
