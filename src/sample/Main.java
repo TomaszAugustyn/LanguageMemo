@@ -152,6 +152,13 @@ public class Main extends Application {
 
     }
 
+    public void enableOrDisableStartLearningButton(){
+        if(wordEntryList.getCount() > 0)
+            tabLearningController.startBtn.setDisable(false);
+        else
+            tabLearningController.startBtn.setDisable(true);
+    }
+
     public WordEntryList getWordEntryList(){
         return this.wordEntryList;
     }

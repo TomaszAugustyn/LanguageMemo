@@ -95,9 +95,9 @@ public class TabWordsController {
         translationField.clearEntries();
         wordField.getEntries().addAll(wordEntryList.getWordsAsList());
         translationField.getEntries().addAll(wordEntryList.getTranslationsAsList());
+        main.enableOrDisableStartLearningButton();
 
     }
-
 
 
     private void setToggleSwitchOnMouseClicked() {
