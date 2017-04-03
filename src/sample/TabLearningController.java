@@ -24,6 +24,7 @@ public class TabLearningController {
     @FXML private TextField wordsPerSessionField;
     private ToggleGroup toggleGroup = new ToggleGroup();
     private WordEntryList wordEntryList;
+    private boolean sessionStarted = false;
 
     private Main main;
 
@@ -49,11 +50,23 @@ public class TabLearningController {
     }
 
     @FXML private void onStartBtnClicked(ActionEvent actionEvent){
-        wordEntryList = main.getWordEntryList();
-        int nrOfWordsPerSession = getNrOfWordsPerSession();
-        List<WordEntry> wordsSubList =  wordEntryList.getNRandomUniqueWordEntries(nrOfWordsPerSession);
+        if(sessionStarted){
+            startBtn.setText("Start learning");
+            startBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
+            sessionStarted = false;
+        }else{
+            startBtn.setText("Stop learning");
+            startBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
+            sessionStarted = true;
+        }
 
-        System.out.println(wordsSubList);
+        if(sessionStarted){
+            wordEntryList = main.getWordEntryList();
+            int nrOfWordsPerSession = getNrOfWordsPerSession();
+            List<WordEntry> wordsSubList =  wordEntryList.getNRandomUniqueWordEntries(nrOfWordsPerSession);
+
+            System.out.println(wordsSubList);
+        }
 
     }
 
