@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+
+import java.util.List;
+
 import static java.lang.Math.min;
 
 /**
@@ -47,18 +50,24 @@ public class TabLearningController {
 
     @FXML private void onStartBtnClicked(ActionEvent actionEvent){
         wordEntryList = main.getWordEntryList();
-        String sWordsPerSession = wordsPerSessionField.getText();
+        int nrOfWordsPerSession = getNrOfWordsPerSession();
+        List<WordEntry> wordsSubList =  wordEntryList.getNRandomUniqueWordEntries(nrOfWordsPerSession);
+
+        System.out.println(wordsSubList);
+
+    }
+
+    private int getNrOfWordsPerSession() {
+        String stringFromField = wordsPerSessionField.getText();
         int nrOfWordsPerSession = (int)wordEntryList.getCount();
 
-        if(!sWordsPerSession.isEmpty()){
-            int nrFromField = Integer.parseInt(sWordsPerSession);
+        if(!stringFromField.isEmpty()){
+            int nrFromField = Integer.parseInt(stringFromField);
 
             if(nrFromField > 0){
                 nrOfWordsPerSession = min(nrFromField, nrOfWordsPerSession);
             }
         }
-
-        System.out.println(nrOfWordsPerSession);
-
+        return nrOfWordsPerSession;
     }
 }

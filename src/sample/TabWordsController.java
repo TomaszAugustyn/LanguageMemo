@@ -129,6 +129,7 @@ public class TabWordsController {
     public void onAddWordBtnClicked(ActionEvent actionEvent) {
         String word = wordField.getText();
         String translation = translationField.getText();
+        WordEntry wordEntry = new WordEntry(word, translation);
 
         if(word.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word field must not be empty.", ButtonType.OK);
@@ -137,6 +138,10 @@ public class TabWordsController {
         }
         else if(translation.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Translation field must not be empty.", ButtonType.OK);
+            alert.showAndWait();
+        }
+        else if(wordEntryList.isWordEntryOnList(wordEntry)){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "This word entry [word: " + word + ", translation: " + translation + "] " + "is already in your dictionary.", ButtonType.OK);
             alert.showAndWait();
         }
         else{

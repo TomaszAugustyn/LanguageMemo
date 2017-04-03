@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,6 +95,16 @@ public class WordEntryList {
         }
 
         return "";
+    }
+
+    public List<WordEntry> getNRandomUniqueWordEntries(int n) throws IllegalArgumentException{
+        if(n > getCount())
+            throw new IllegalArgumentException();
+
+        List<WordEntry> wordsListCopy = new ArrayList<>(wordsList);
+        Collections.shuffle(wordsListCopy);
+        return wordsListCopy.subList(0, n);
+
     }
 
     public WordEntryList(List<WordEntry> wordsList) {
