@@ -134,22 +134,24 @@ public class TabWordsController {
         if(word.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word field must not be empty.", ButtonType.OK);
             alert.showAndWait();
-
+            return;
         }
-        else if(translation.isEmpty()){
+        if(translation.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Translation field must not be empty.", ButtonType.OK);
             alert.showAndWait();
+            return;
         }
-        else if(wordEntryList.isWordEntryOnList(wordEntry)){
+        if(wordEntryList.isWordEntryOnList(wordEntry)){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "This word entry [word: " + word + ", translation: " + translation + "] " + "is already in your dictionary.", ButtonType.OK);
             alert.showAndWait();
+            return;
         }
-        else{
-            wordEntryList.addWord(new WordEntry(word, translation));
-            afterWordsListChanged();
-            wordField.clear();
-            translationField.clear();
-        }
+
+        wordEntryList.addWord(new WordEntry(word, translation));
+        afterWordsListChanged();
+        wordField.clear();
+        translationField.clear();
+
     }
 
     public void onDeleteWordBtnClicked(ActionEvent actionEvent){
@@ -160,24 +162,25 @@ public class TabWordsController {
         if(word.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word field must not be empty. Click on the table to load a word entry.", ButtonType.OK);
             alert.showAndWait();
-
+            return;
         }
-        else if(translation.isEmpty()){
+        if(translation.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Translation field must not be empty. Click on the table to load a word entry.", ButtonType.OK);
             alert.showAndWait();
+            return;
         }
-        else if(wordEntryList.isWordEntryOnList(wordEntry)){
-            wordEntryList.deleteWord(wordEntry);
-            afterWordsListChanged();
-            wordField.clear();
-            translationField.clear();
-        }
-        else{
+        if(!wordEntryList.isWordEntryOnList(wordEntry)){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "The word entry you want to delete doesn't exist in your dictionary.", ButtonType.OK);
             alert.showAndWait();
             wordField.clear();
             translationField.clear();
+            return;
         }
+
+        wordEntryList.deleteWord(wordEntry);
+        afterWordsListChanged();
+        wordField.clear();
+        translationField.clear();
     }
 
     private void recalculateWordsCounter(){

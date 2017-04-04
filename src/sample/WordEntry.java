@@ -11,6 +11,8 @@ public class WordEntry {
 
     private StringProperty word;
     private StringProperty  translation;
+    public static final int ENG_2_POL = 0;
+    public static final int POL_2_ENG = 1;
 
     public WordEntry(String word, String translation) {
         this.word = new SimpleStringProperty(word);
@@ -34,6 +36,37 @@ public class WordEntry {
         this.translation.set(translation);
     }
 
+
+    public void convertWordEntryToUnderscores(int conversionType) throws IllegalArgumentException{
+        String word = this.getWord();
+        String translation = this.getTranslation();
+
+        if(conversionType == ENG_2_POL && !this.isWordOrTranslationEmpty()){
+
+            String UnderscoredTranslationStr = translation.replaceAll("[\\w]", "_ ");
+            String modifiedTranslation = String.valueOf(translation.charAt(0))
+                                        + UnderscoredTranslationStr.substring(1, UnderscoredTranslationStr.length());
+            this.setWord(word);
+            this.setTranslation(modifiedTranslation);
+            return;
+
+        }
+       if(conversionType == POL_2_ENG && !this.isWordOrTranslationEmpty()){
+
+            String underscoredWordStr = word.replaceAll("[\\w]", "_ ");
+            String modifiedWord = String.valueOf(word.charAt(0))
+                                + underscoredWordStr.substring(1, underscoredWordStr.length());
+            this.setWord(modifiedWord);
+            this.setTranslation(translation);
+            return;
+        }
+
+        throw new IllegalArgumentException();
+    }
+
+    public boolean isWordOrTranslationEmpty(){
+        return this.getWord().isEmpty() || this.getTranslation().isEmpty();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

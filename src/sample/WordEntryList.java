@@ -23,20 +23,22 @@ public class WordEntryList {
 
     public void addWord(WordEntry wordEntry){
         if(!wordEntry.getWord().isEmpty() &&
-                !wordEntry.getTranslation().isEmpty())
+                !wordEntry.getTranslation().isEmpty()) {
             this.wordsList.add(wordEntry);
-        else {
-            System.out.println("Word or translation cannot be empty");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setHeaderText("Information");
-            alert.setContentText("Nastia! Word or translation cannot be empty!");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
+            return;
         }
+
+        System.out.println("Word or translation cannot be empty");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText("Information");
+        alert.setContentText("Nastia! Word or translation cannot be empty!");
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                System.out.println("Pressed OK.");
+            }
+        });
+
     }
 
     public void deleteWord(WordEntry wordEntry){

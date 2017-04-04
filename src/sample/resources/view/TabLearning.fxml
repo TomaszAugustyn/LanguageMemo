@@ -5,6 +5,9 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="356.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TabLearningController">
    <children>
@@ -13,5 +16,35 @@
       <RadioButton fx:id="p2eRadio" layoutX="27.0" layoutY="113.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="138.0" text="Polish --&gt; English" />
       <TextField fx:id="wordsPerSessionField" layoutX="27.0" layoutY="177.0" prefHeight="25.0" prefWidth="138.0" />
       <Label alignment="CENTER" layoutX="27.0" layoutY="152.0" prefHeight="17.0" prefWidth="138.0" text="Words per learning:" />
+      <Label fx:id="englishWordLabel" layoutX="226.0" layoutY="41.0" prefHeight="99.0" prefWidth="358.0" text="Press &quot;Start learning&quot;">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.8428571428571429" startX="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="TRANSPARENT" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+      <Label alignment="TOP_LEFT" layoutX="226.0" layoutY="21.0" prefHeight="17.0" prefWidth="138.0" text="English word:" />
+      <Label alignment="TOP_LEFT" layoutX="226.0" layoutY="149.0" prefHeight="17.0" prefWidth="138.0" text="Polish word:" />
+      <Label fx:id="polishWordLabel" layoutX="226.0" layoutY="170.0" prefHeight="99.0" prefWidth="358.0" text="Press &quot;Start learning&quot;">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0" startX="1.0" startY="0.9476190476190476">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <TextField fx:id="enterTranslationField" layoutX="226.0" layoutY="293.0" prefHeight="25.0" prefWidth="220.0" />
+      <Label alignment="TOP_LEFT" layoutX="226.0" layoutY="270.0" prefHeight="17.0" prefWidth="138.0" text="Enter translation:" />
+      <Button fx:id="enterBtn" layoutX="474.0" layoutY="292.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: mediumpurple; -fx-border-color: black;" text="Enter" />
    </children>
 </AnchorPane>

@@ -4,10 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 
 import java.util.List;
 
@@ -22,6 +19,11 @@ public class TabLearningController {
     @FXML private RadioButton p2eRadio;
     @FXML private RadioButton e2pRadio;
     @FXML private TextField wordsPerSessionField;
+    @FXML private TextField enterTranslationField;
+    @FXML private Label englishWordLabel;
+    @FXML private Label polishWordLabel;
+    @FXML private Button enterBtn;
+
     private ToggleGroup toggleGroup = new ToggleGroup();
     private WordEntryList wordEntryList;
     private boolean sessionStarted = false;
@@ -35,16 +37,14 @@ public class TabLearningController {
         p2eRadio.setToggleGroup(toggleGroup);
         e2pRadio.setToggleGroup(toggleGroup);
         p2eRadio.setSelected(true);
+        enterBtn.setDisable(true);
 
-        wordsPerSessionField.textProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (newValue.length() < 5 && newValue.matches("\\d*")) {
-                    int value = Integer.parseInt(newValue);
-                } else {
-                    wordsPerSessionField.setText(oldValue);
-                    wordsPerSessionField.positionCaret(wordsPerSessionField.getLength());
-                }
+        wordsPerSessionField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() < 5 && newValue.matches("\\d*")) {
+                return;
             }
+            wordsPerSessionField.setText(oldValue);
+            wordsPerSessionField.positionCaret(wordsPerSessionField.getLength());
         });
 
     }
@@ -53,10 +53,12 @@ public class TabLearningController {
         if(sessionStarted){
             startBtn.setText("Start learning");
             startBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
+            enterBtn.setDisable(true);
             sessionStarted = false;
         }else{
             startBtn.setText("Stop learning");
             startBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
+            enterBtn.setDisable(false);
             sessionStarted = true;
         }
 
@@ -65,7 +67,7 @@ public class TabLearningController {
             int nrOfWordsPerSession = getNrOfWordsPerSession();
             List<WordEntry> wordsSubList =  wordEntryList.getNRandomUniqueWordEntries(nrOfWordsPerSession);
 
-            System.out.println(wordsSubList);
+            //System.out.println(wordsSubList);
         }
 
     }
