@@ -37,7 +37,7 @@ public class WordEntry {
     }
 
 
-    public void convertWordEntryToUnderscores(int conversionType) throws IllegalArgumentException{
+    public WordEntry convertWordEntryToUnderscores(int conversionType) throws IllegalArgumentException{
         String word = this.getWord();
         String translation = this.getTranslation();
 
@@ -46,9 +46,7 @@ public class WordEntry {
             String UnderscoredTranslationStr = translation.replaceAll("[\\w]", "_ ");
             String modifiedTranslation = String.valueOf(translation.charAt(0))
                                         + UnderscoredTranslationStr.substring(1, UnderscoredTranslationStr.length());
-            this.setWord(word);
-            this.setTranslation(modifiedTranslation);
-            return;
+            return new WordEntry(word, modifiedTranslation);
 
         }
        if(conversionType == POL_2_ENG && !this.isWordOrTranslationEmpty()){
@@ -56,9 +54,7 @@ public class WordEntry {
             String underscoredWordStr = word.replaceAll("[\\w]", "_ ");
             String modifiedWord = String.valueOf(word.charAt(0))
                                 + underscoredWordStr.substring(1, underscoredWordStr.length());
-            this.setWord(modifiedWord);
-            this.setTranslation(translation);
-            return;
+            return new WordEntry(modifiedWord, translation);
         }
 
         throw new IllegalArgumentException();
