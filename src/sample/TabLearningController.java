@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.min;
-import static javafx.scene.paint.CycleMethod.NO_CYCLE;
+
 
 /**
  * Created by Tomek on 26.03.2017.
@@ -36,6 +34,17 @@ public class TabLearningController {
         private static int nrOfWordsPerSession = 0;
         private static List<WordEntry> randomizedWordList = new ArrayList<>();
         private static int translationMode = 0;
+        private static int currentPositionInList = 0;
+        private static String correctAnswerForCurrPos = "";
+
+        private static void resetVariables(){
+            nrOfWordsPerSession = 0;
+            randomizedWordList = new ArrayList<>();
+            translationMode = 0;
+            currentPositionInList = 0;
+            correctAnswerForCurrPos = "";
+        }
+
     }
 
     @FXML public Button startBtn;
@@ -43,7 +52,7 @@ public class TabLearningController {
     @FXML private RadioButton e2pRadio;
     @FXML private TextField wordsPerSessionField;
     @FXML private TextField enterTranslationField;
-    @FXML private Label englishWordLabel;
+    @FXML public Label englishWordLabel;
     @FXML private Label polishWordLabel;
     @FXML private Button enterBtn;
 
@@ -80,10 +89,12 @@ public class TabLearningController {
             SessionContainer.nrOfWordsPerSession = getNrOfWordsPerSession();
             SessionContainer.randomizedWordList =  wordEntryList.getNRandomUniqueWordEntries(SessionContainer.nrOfWordsPerSession);
             SessionContainer.translationMode = e2pRadio.isSelected()? WordEntry.ENG_2_POL : WordEntry.POL_2_ENG;
+            SessionContainer.currentPositionInList = 0;
+            SessionContainer.correctAnswerForCurrPos = "";
 
-            System.out.println(SessionContainer.randomizedWordList);
+            displayFirstPosition();
+
         }
-
     }
 
     private void adjustControlsToSessionState() {
@@ -95,6 +106,7 @@ public class TabLearningController {
             polishWordLabel.setText("Press \"Start learning\"");
             englishWordLabel.setTextFill(EnglishLblGradientStyle.gradient);
             polishWordLabel.setTextFill(PolishLblGradientStyle.gradient);
+            SessionContainer.resetVariables();
 
         }else{
             startBtn.setText("Stop learning");
@@ -121,5 +133,16 @@ public class TabLearningController {
             }
         }
         return nrOfWordsPerSession;
+    }
+
+    private void displayFirstPosition(){
+        if(SessionContainer.randomizedWordList.size() > 0){
+            WordEntry wordEntry = SessionContainer.randomizedWordList.get(0);
+            SessionContainer.correctAnswerForCurrPos = SessionContainer.translationMode == WordEntry.ENG_2_POL ?  wordEntry.getTranslation() : wordEntry.getWord();
+            WordEntry underscoredEntry = wordEntry.convertWordEntryToUnderscores(SessionContainer.translationMode);
+            englishWordLabel.setText(underscoredEntry.getWord());
+            polishWordLabel.setText(underscoredEntry.getTranslation());
+            SessionContainer.currentPositionInList = 1;
+        }
     }
 }
