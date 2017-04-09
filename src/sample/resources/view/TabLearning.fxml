@@ -44,7 +44,7 @@
          </textFill>
       </Label>
       <TextField fx:id="enterTranslationField" layoutX="226.0" layoutY="293.0" prefHeight="25.0" prefWidth="220.0" />
-      <Label alignment="TOP_LEFT" layoutX="226.0" layoutY="270.0" prefHeight="17.0" prefWidth="138.0" text="Enter translation:" />
-      <Button fx:id="enterBtn" layoutX="474.0" layoutY="292.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: mediumpurple; -fx-border-color: black;" text="Enter" />
+      <Label alignment="TOP_LEFT" layoutX="226.0" layoutY="270.0" prefHeight="17.0" prefWidth="138.0" text="Your answer:" />
+      <Button fx:id="enterBtn" layoutX="474.0" layoutY="292.0" mnemonicParsing="false" onAction="#onEnterBtnClicked" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: mediumpurple; -fx-border-color: black;" text="Enter" />
    </children>
 </AnchorPane>

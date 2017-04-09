@@ -126,7 +126,7 @@ public class TabWordsController {
         });
     }
 
-    public void onAddWordBtnClicked(ActionEvent actionEvent) {
+    public void onAddWordBtnClicked() {
         String word = wordField.getText();
         String translation = translationField.getText();
         WordEntry wordEntry = new WordEntry(word, translation);
@@ -154,7 +154,7 @@ public class TabWordsController {
 
     }
 
-    public void onDeleteWordBtnClicked(ActionEvent actionEvent){
+    public void onDeleteWordBtnClicked(){
         String word = wordField.getText();
         String translation = translationField.getText();
         WordEntry wordEntry = new WordEntry(word, translation);

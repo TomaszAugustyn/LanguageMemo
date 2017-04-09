@@ -97,7 +97,7 @@ public class Main extends Application {
         }
     }
 
-    public void onOpenChooser(ActionEvent actionEvent) {
+    @FXML public void onOpenChooser(){
 
         checkConditionAndWriteFileFromList();
 
@@ -117,8 +117,9 @@ public class Main extends Application {
             e.printStackTrace();
             System.out.println("File not found.");
         }
-
     }
+
+
 
     private WordEntryList getWordEntryListFromFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream(file));

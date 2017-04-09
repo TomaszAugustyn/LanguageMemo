@@ -34,6 +34,8 @@ public class TabLearningController {
         private static int nrOfWordsPerSession = 0;
         private static List<WordEntry> randomizedWordList = new ArrayList<>();
         private static int translationMode = 0;
+        private static int correctAnswers = 0;
+        private static int wrongAnswers = 0;
         private static int currentPositionInList = 0;
         private static String correctAnswerForCurrPos = "";
 
@@ -41,6 +43,8 @@ public class TabLearningController {
             nrOfWordsPerSession = 0;
             randomizedWordList = new ArrayList<>();
             translationMode = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
             currentPositionInList = 0;
             correctAnswerForCurrPos = "";
         }
@@ -52,7 +56,7 @@ public class TabLearningController {
     @FXML private RadioButton e2pRadio;
     @FXML private TextField wordsPerSessionField;
     @FXML private TextField enterTranslationField;
-    @FXML public Label englishWordLabel;
+    @FXML private Label englishWordLabel;
     @FXML private Label polishWordLabel;
     @FXML private Button enterBtn;
 
@@ -80,7 +84,7 @@ public class TabLearningController {
 
     }
 
-    @FXML private void onStartBtnClicked(ActionEvent actionEvent){
+    @FXML private void onStartBtnClicked(){
         adjustControlsToSessionState();
         toggleSessionState();
 
@@ -89,8 +93,6 @@ public class TabLearningController {
             SessionContainer.nrOfWordsPerSession = getNrOfWordsPerSession();
             SessionContainer.randomizedWordList =  wordEntryList.getNRandomUniqueWordEntries(SessionContainer.nrOfWordsPerSession);
             SessionContainer.translationMode = e2pRadio.isSelected()? WordEntry.ENG_2_POL : WordEntry.POL_2_ENG;
-            SessionContainer.currentPositionInList = 0;
-            SessionContainer.correctAnswerForCurrPos = "";
 
             displayFirstPosition();
 
@@ -106,6 +108,9 @@ public class TabLearningController {
             polishWordLabel.setText("Press \"Start learning\"");
             englishWordLabel.setTextFill(EnglishLblGradientStyle.gradient);
             polishWordLabel.setTextFill(PolishLblGradientStyle.gradient);
+            wordsPerSessionField.setDisable(false);
+            e2pRadio.setDisable(false);
+            p2eRadio.setDisable(false);
             SessionContainer.resetVariables();
 
         }else{
@@ -114,6 +119,9 @@ public class TabLearningController {
             enterBtn.setDisable(false);
             englishWordLabel.setTextFill(Color.BLACK);
             polishWordLabel.setTextFill(Color.BLACK);
+            wordsPerSessionField.setDisable(true);
+            e2pRadio.setDisable(true);
+            p2eRadio.setDisable(true);
         }
     }
 
@@ -143,6 +151,45 @@ public class TabLearningController {
             englishWordLabel.setText(underscoredEntry.getWord());
             polishWordLabel.setText(underscoredEntry.getTranslation());
             SessionContainer.currentPositionInList = 1;
+        }
+    }
+    @FXML private void onEnterBtnClicked(){
+        if(!enterTranslationField.getText().isEmpty()) {
+            String enteredWord = enterTranslationField.getText().toUpperCase();
+            if (enteredWord.equals((SessionContainer.correctAnswerForCurrPos).toUpperCase())){
+                SessionContainer.correctAnswers++;
+                System.out.println("Correct Answer!");
+                enterTranslationField.clear();
+                displayNextPosition();
+                return;
+            }
+            SessionContainer.wrongAnswers++;
+            System.out.println("wrong!!!");
+            enterTranslationField.clear();
+            displayNextPosition();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "The word you wrote is empty. Please give your answer.", ButtonType.OK);
+        alert.showAndWait();
+
+    }
+
+    private void displayNextPosition() {
+        if(SessionContainer.currentPositionInList < SessionContainer.randomizedWordList.size()){
+            WordEntry wordEntry = SessionContainer.randomizedWordList.get(SessionContainer.currentPositionInList);
+            SessionContainer.correctAnswerForCurrPos = SessionContainer.translationMode == WordEntry.ENG_2_POL ?  wordEntry.getTranslation() : wordEntry.getWord();
+            WordEntry underscoredEntry = wordEntry.convertWordEntryToUnderscores(SessionContainer.translationMode);
+            englishWordLabel.setText(underscoredEntry.getWord());
+            polishWordLabel.setText(underscoredEntry.getTranslation());
+            SessionContainer.currentPositionInList++;
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Session finished. your score: \n" + "Correct Answers: "
+                    + SessionContainer.correctAnswers + "\n Wrong Answers: " + SessionContainer.wrongAnswers , ButtonType.OK);
+            alert.showAndWait();
+            onStartBtnClicked();
+            startBtn.requestFocus();
         }
     }
 }
