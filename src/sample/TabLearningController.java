@@ -58,6 +58,8 @@ public class TabLearningController {
     @FXML private TextField enterTranslationField;
     @FXML private Label englishWordLabel;
     @FXML private Label polishWordLabel;
+    @FXML private Label correctCounter;
+    @FXML private Label wrongCounter;
     @FXML private Button enterBtn;
 
     private ToggleGroup toggleGroup = new ToggleGroup();
@@ -73,6 +75,7 @@ public class TabLearningController {
         e2pRadio.setToggleGroup(toggleGroup);
         p2eRadio.setSelected(true);
         enterBtn.setDisable(true);
+        enterBtn.setDefaultButton(true);
 
         wordsPerSessionField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() < 5 && newValue.matches("\\d*")) {

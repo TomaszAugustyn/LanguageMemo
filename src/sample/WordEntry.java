@@ -43,7 +43,7 @@ public class WordEntry {
 
         if(conversionType == ENG_2_POL && !this.isWordOrTranslationEmpty()){
 
-            String UnderscoredTranslationStr = translation.replaceAll("[\\w]", "_ ");
+            String UnderscoredTranslationStr = translation.replaceAll("[\\S]", "_ ");
             String modifiedTranslation = String.valueOf(translation.charAt(0))
                                         + UnderscoredTranslationStr.substring(1, UnderscoredTranslationStr.length());
             return new WordEntry(word, modifiedTranslation);
@@ -51,7 +51,7 @@ public class WordEntry {
         }
        if(conversionType == POL_2_ENG && !this.isWordOrTranslationEmpty()){
 
-            String underscoredWordStr = word.replaceAll("[\\w]", "_ ");
+            String underscoredWordStr = word.replaceAll("[\\S]", "_ ");
             String modifiedWord = String.valueOf(word.charAt(0))
                                 + underscoredWordStr.substring(1, underscoredWordStr.length());
             return new WordEntry(modifiedWord, translation);
