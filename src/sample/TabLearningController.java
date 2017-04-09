@@ -55,7 +55,7 @@ public class TabLearningController {
     @FXML private RadioButton p2eRadio;
     @FXML private RadioButton e2pRadio;
     @FXML private TextField wordsPerSessionField;
-    @FXML private TextField enterTranslationField;
+    @FXML private TextField answerField;
     @FXML private Label englishWordLabel;
     @FXML private Label polishWordLabel;
     @FXML private Label correctCounter;
@@ -125,6 +125,7 @@ public class TabLearningController {
             wordsPerSessionField.setDisable(true);
             e2pRadio.setDisable(true);
             p2eRadio.setDisable(true);
+            answerField.requestFocus();
         }
     }
 
@@ -157,18 +158,20 @@ public class TabLearningController {
         }
     }
     @FXML private void onEnterBtnClicked(){
-        if(!enterTranslationField.getText().isEmpty()) {
-            String enteredWord = enterTranslationField.getText().toUpperCase();
+        if(!answerField.getText().isEmpty()) {
+            String enteredWord = answerField.getText().toUpperCase();
             if (enteredWord.equals((SessionContainer.correctAnswerForCurrPos).toUpperCase())){
                 SessionContainer.correctAnswers++;
+                correctCounter.setText(String.valueOf(SessionContainer.correctAnswers));
                 System.out.println("Correct Answer!");
-                enterTranslationField.clear();
+                answerField.clear();
                 displayNextPosition();
                 return;
             }
             SessionContainer.wrongAnswers++;
+            wrongCounter.setText(String.valueOf(SessionContainer.wrongAnswers));
             System.out.println("wrong!!!");
-            enterTranslationField.clear();
+            answerField.clear();
             displayNextPosition();
             return;
         }
@@ -193,6 +196,8 @@ public class TabLearningController {
             alert.showAndWait();
             onStartBtnClicked();
             startBtn.requestFocus();
+            correctCounter.setText("0");
+            wrongCounter.setText("0");
         }
     }
 }

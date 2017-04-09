@@ -1,1 +1,1 @@
-rope,lina;shoes,buty;phone,telefon;mirror,lustro;to work,pracować;to play,bawić się;to change,zmieniać;
+shoes,buty;phone,telefon;mirror,lustro;to work,pracować;to play,bawić się;
