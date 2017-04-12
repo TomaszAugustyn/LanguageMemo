@@ -28,7 +28,6 @@ public class WordEntryList {
             return;
         }
 
-        System.out.println("Word or translation cannot be empty");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText("Information");
@@ -42,12 +41,7 @@ public class WordEntryList {
     }
 
     public void deleteWord(WordEntry wordEntry){
-        for (Iterator<WordEntry> iter = wordsList.listIterator(); iter.hasNext(); ) {
-            WordEntry w = iter.next();
-            if (wordEntry.equals(w)) {
-                iter.remove();
-            }
-        }
+        wordsList.removeIf(wordEntry::equals);
     }
 
     public boolean isWordEntryOnList(WordEntry wordEntry){

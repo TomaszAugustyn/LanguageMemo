@@ -207,6 +207,7 @@ public class TabWordsController {
         translationColumn = new TableColumn("Translation");
         wordColumn.impl_setWidth(125);
         translationColumn.impl_setWidth(122);
+        translationColumn.setStyle("-fx-text-fill: #7f8184");
 
         wordColumn.setCellValueFactory(
                 new PropertyValueFactory<WordEntry,String>("Word")
@@ -214,6 +215,7 @@ public class TabWordsController {
         translationColumn.setCellValueFactory(
                 new PropertyValueFactory<WordEntry,String>("Translation")
         );
+
 
     }
 

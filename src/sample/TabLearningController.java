@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ public class TabLearningController {
         private static int wrongAnswers = 0;
         private static int currentPositionInList = 0;
         private static String correctAnswerForCurrPos = "";
+        private static boolean lastAnswerWrong = false;
 
         private static void resetVariables(){
             nrOfWordsPerSession = 0;
@@ -47,6 +50,7 @@ public class TabLearningController {
             wrongAnswers = 0;
             currentPositionInList = 0;
             correctAnswerForCurrPos = "";
+            lastAnswerWrong = false;
         }
 
     }
@@ -158,6 +162,17 @@ public class TabLearningController {
         }
     }
     @FXML private void onEnterBtnClicked(){
+        if(SessionContainer.lastAnswerWrong){
+
+            answerField.clear();
+            enterBtn.setText("Enter");
+            enterBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
+            polishWordLabel.setTextFill(Color.BLACK);
+            englishWordLabel.setTextFill(Color.BLACK);
+            SessionContainer.lastAnswerWrong = false;
+            displayNextPosition();
+            return;
+        }
         if(!answerField.getText().isEmpty()) {
             String enteredWord = answerField.getText().toUpperCase();
             if (enteredWord.equals((SessionContainer.correctAnswerForCurrPos).toUpperCase())){
@@ -171,8 +186,17 @@ public class TabLearningController {
             SessionContainer.wrongAnswers++;
             wrongCounter.setText(String.valueOf(SessionContainer.wrongAnswers));
             System.out.println("wrong!!!");
-            answerField.clear();
-            displayNextPosition();
+            SessionContainer.lastAnswerWrong = true;
+            String correctAnswer = SessionContainer.correctAnswerForCurrPos;
+            if(SessionContainer.translationMode == WordEntry.ENG_2_POL)
+                polishWordLabel.setText(correctAnswer);
+             else
+                englishWordLabel.setText(correctAnswer);
+
+            polishWordLabel.setTextFill(Color.rgb(255, 72, 85));
+            englishWordLabel.setTextFill(Color.rgb(255, 72, 85));
+            enterBtn.setText("Next");
+            enterBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
             return;
         }
 
