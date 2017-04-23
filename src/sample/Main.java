@@ -1,17 +1,21 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -32,7 +36,7 @@ public class Main extends Application {
     @FXML private TabWordsController tabWordsController;
     @FXML private TextField filePath;
     @FXML private Button fileChooser;
-
+    @FXML private ImageView image;
 
     @Override
     public void start(Stage stage) throws Exception{
@@ -41,6 +45,8 @@ public class Main extends Application {
         root = loader.load();
         scene = new Scene(root);
         stage.setTitle("NastiaMemo");
+        stage.getIcons().add(new Image("sample/resources/logo/LM.png"));
+        image.setImage(new Image("sample/resources/logo/NastiaMemo.png"));
         stage.setScene(scene);
         stage.show();
         scene.getStylesheets().add("sample/resources/mySwitch.css");

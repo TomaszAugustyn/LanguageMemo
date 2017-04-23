@@ -2,7 +2,6 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -207,7 +206,6 @@ public class TabWordsController {
         translationColumn = new TableColumn("Translation");
         wordColumn.impl_setWidth(125);
         translationColumn.impl_setWidth(122);
-        translationColumn.setStyle("-fx-text-fill: #7f8184");
 
         wordColumn.setCellValueFactory(
                 new PropertyValueFactory<WordEntry,String>("Word")

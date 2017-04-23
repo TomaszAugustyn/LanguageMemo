@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -57,9 +58,10 @@
     </MenuBar>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <TextField fx:id="filePath" layoutX="74.0" layoutY="32.0" prefHeight="27.0" prefWidth="365.0" />
+            <TextField fx:id="filePath" layoutX="121.0" layoutY="32.0" prefHeight="27.0" prefWidth="318.0" />
             <Button fx:id="fileChooser" layoutX="471.0" layoutY="32.0" mnemonicParsing="false" onAction="#onOpenChooser" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: gold; -fx-border-color: black;" text="Choose file..." />
-            <Label layoutX="74.0" layoutY="11.0" text="Path to text file:" />
+            <Label layoutX="122.0" layoutY="11.0" text="Path to text file:" />
+            <ImageView fx:id="image" fitHeight="83.0" fitWidth="105.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true" />
          </children></Pane>
       <TabPane prefHeight="486.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
