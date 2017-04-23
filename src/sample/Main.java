@@ -44,6 +44,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         scene.getStylesheets().add("sample/resources/mySwitch.css");
+        scene.getStylesheets().add("sample/resources/styles.css");
 
         loadedFile = new File(System.getProperty("user.dir") + "\\LanguageMemo.txt");
         if (!loadedFile.exists()) {

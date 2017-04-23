@@ -20,5 +20,14 @@
         <jarDirectory url="file://$MODULE_DIR$/lib/controlsfx-8.40.12" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/richtextfx/richtextfx-fat-0.7-M5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

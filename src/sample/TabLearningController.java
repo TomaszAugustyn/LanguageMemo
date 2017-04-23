@@ -1,14 +1,12 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import org.fxmisc.richtext.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +58,8 @@ public class TabLearningController {
     @FXML private RadioButton e2pRadio;
     @FXML private TextField wordsPerSessionField;
     @FXML private TextField answerField;
-    @FXML private Label englishWordLabel;
-    @FXML private Label polishWordLabel;
+    @FXML private StyleClassedTextArea englishWordLabel;
+    @FXML private StyleClassedTextArea polishWordLabel;
     @FXML private Label correctCounter;
     @FXML private Label wrongCounter;
     @FXML private Button enterBtn;
@@ -80,6 +78,12 @@ public class TabLearningController {
         p2eRadio.setSelected(true);
         enterBtn.setDisable(true);
         enterBtn.setDefaultButton(true);
+        englishWordLabel.replaceText("Press \"Start learning\"");
+        polishWordLabel.replaceText("Press \"Start learning\"");
+        englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(), "welcometext1");
+        polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"welcometext2");
+        polishWordLabel.setStyle("-fx-background-color: transparent;");
+        englishWordLabel.setStyle("-fx-background-color: transparent;");
 
         wordsPerSessionField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() < 5 && newValue.matches("\\d*")) {
@@ -111,21 +115,23 @@ public class TabLearningController {
             startBtn.setText("Start learning");
             startBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
             enterBtn.setDisable(true);
-            englishWordLabel.setText("Press \"Start learning\"");
-            polishWordLabel.setText("Press \"Start learning\"");
-            englishWordLabel.setTextFill(EnglishLblGradientStyle.gradient);
-            polishWordLabel.setTextFill(PolishLblGradientStyle.gradient);
+            englishWordLabel.replaceText("Press \"Start learning\"");
+            polishWordLabel.replaceText("Press \"Start learning\"");
+            englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(), "welcometext1");
+            polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"welcometext2");
             wordsPerSessionField.setDisable(false);
             e2pRadio.setDisable(false);
             p2eRadio.setDisable(false);
+            correctCounter.setText("0");
+            wrongCounter.setText("0");
             SessionContainer.resetVariables();
 
         }else{
             startBtn.setText("Stop learning");
             startBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
             enterBtn.setDisable(false);
-            englishWordLabel.setTextFill(Color.BLACK);
-            polishWordLabel.setTextFill(Color.BLACK);
+            englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(),"normaltext");
+            polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"normaltext");
             wordsPerSessionField.setDisable(true);
             e2pRadio.setDisable(true);
             p2eRadio.setDisable(true);
@@ -156,8 +162,8 @@ public class TabLearningController {
             WordEntry wordEntry = SessionContainer.randomizedWordList.get(0);
             SessionContainer.correctAnswerForCurrPos = SessionContainer.translationMode == WordEntry.ENG_2_POL ?  wordEntry.getTranslation() : wordEntry.getWord();
             WordEntry underscoredEntry = wordEntry.convertWordEntryToUnderscores(SessionContainer.translationMode);
-            englishWordLabel.setText(underscoredEntry.getWord());
-            polishWordLabel.setText(underscoredEntry.getTranslation());
+            englishWordLabel.replaceText(underscoredEntry.getWord());
+            polishWordLabel.replaceText(underscoredEntry.getTranslation());
             SessionContainer.currentPositionInList = 1;
         }
     }
@@ -166,16 +172,14 @@ public class TabLearningController {
 
             answerField.clear();
             enterBtn.setText("Enter");
-            enterBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
-            polishWordLabel.setTextFill(Color.BLACK);
-            englishWordLabel.setTextFill(Color.BLACK);
             SessionContainer.lastAnswerWrong = false;
             displayNextPosition();
             return;
         }
         if(!answerField.getText().isEmpty()) {
             String enteredWord = answerField.getText().toUpperCase();
-            if (enteredWord.equals((SessionContainer.correctAnswerForCurrPos).toUpperCase())){
+            String correctAnswer = SessionContainer.correctAnswerForCurrPos;
+            if (enteredWord.equals(correctAnswer.toUpperCase())){
                 SessionContainer.correctAnswers++;
                 correctCounter.setText(String.valueOf(SessionContainer.correctAnswers));
                 System.out.println("Correct Answer!");
@@ -187,14 +191,21 @@ public class TabLearningController {
             wrongCounter.setText(String.valueOf(SessionContainer.wrongAnswers));
             System.out.println("wrong!!!");
             SessionContainer.lastAnswerWrong = true;
-            String correctAnswer = SessionContainer.correctAnswerForCurrPos;
-            if(SessionContainer.translationMode == WordEntry.ENG_2_POL)
-                polishWordLabel.setText(correctAnswer);
-             else
-                englishWordLabel.setText(correctAnswer);
 
-            polishWordLabel.setTextFill(Color.rgb(255, 72, 85));
-            englishWordLabel.setTextFill(Color.rgb(255, 72, 85));
+
+            if(SessionContainer.translationMode == WordEntry.ENG_2_POL) {
+                int lengthWrongAns = answerField.getText().length();
+                polishWordLabel.replaceText(answerField.getText() + "  " + correctAnswer);
+                polishWordLabel.setStyleClass(0, lengthWrongAns,"textStrikeThrough");
+                polishWordLabel.setStyleClass(lengthWrongAns + 2, polishWordLabel.getLength(),"redtext");
+            }
+             else {
+                int lengthWrongAns = answerField.getText().length();
+                englishWordLabel.replaceText(answerField.getText() + "  " + correctAnswer);
+                englishWordLabel.setStyleClass(0, lengthWrongAns,"textStrikeThrough");
+                englishWordLabel.setStyleClass(lengthWrongAns + 2, englishWordLabel.getLength(),"redtext");
+            }
+
             enterBtn.setText("Next");
             enterBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
             return;
@@ -210,9 +221,12 @@ public class TabLearningController {
             WordEntry wordEntry = SessionContainer.randomizedWordList.get(SessionContainer.currentPositionInList);
             SessionContainer.correctAnswerForCurrPos = SessionContainer.translationMode == WordEntry.ENG_2_POL ?  wordEntry.getTranslation() : wordEntry.getWord();
             WordEntry underscoredEntry = wordEntry.convertWordEntryToUnderscores(SessionContainer.translationMode);
-            englishWordLabel.setText(underscoredEntry.getWord());
-            polishWordLabel.setText(underscoredEntry.getTranslation());
+            englishWordLabel.replaceText(underscoredEntry.getWord());
+            polishWordLabel.replaceText(underscoredEntry.getTranslation());
             SessionContainer.currentPositionInList++;
+            enterBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
+            englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(),"normaltext");
+            polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"normaltext");
         }
         else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Session finished. your score: \n" + "Correct Answers: "
