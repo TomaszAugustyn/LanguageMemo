@@ -112,7 +112,8 @@ public class Main extends Application {
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Memo text files", "*.txt"));
         chooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
         try {
-            loadedFile = chooser.showOpenDialog(scene.getWindow());
+            File tmpFile = chooser.showOpenDialog(scene.getWindow());
+            loadedFile = tmpFile == null ? loadedFile : tmpFile;
             wordEntryList = getWordEntryListFromFile(loadedFile);
             initialWordEntryList = getWordEntryListFromFile(loadedFile);
             tabWordsController.afterWordsListChanged();
