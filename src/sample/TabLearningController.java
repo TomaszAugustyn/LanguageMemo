@@ -3,12 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import org.fxmisc.richtext.*;
-
 import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +12,12 @@ import static java.lang.Math.min;
 
 
 /**
- * Created by Tomek on 26.03.2017.
+ * This is a class for controlling "Learning" tab responsible for displaying
+ * words from dictionary during learning session
+ * @author Tomasz Augustyn
  */
 public class TabLearningController {
 
-    private static class EnglishLblGradientStyle{
-        private static Stop[] stops = new Stop[] { new Stop(0, Color.BLACK), new Stop(1, Color.TRANSPARENT)};
-        private static LinearGradient gradient = new LinearGradient(1.0, 0, 1.0, 0.8428571428571429, true, CycleMethod.NO_CYCLE, stops);
-    }
-
-    private static class PolishLblGradientStyle{
-        private static Stop[] stops = new Stop[] { new Stop(0, Color.BLACK), new Stop(1, Color.WHITE)};
-        private static LinearGradient gradient = new LinearGradient(1.0, 0.9476190476190476, 1.0, 1.0, true, CycleMethod.REFLECT, stops);
-    }
 
     private static class SessionContainer{
         private static boolean sessionStarted = false;
@@ -52,7 +40,6 @@ public class TabLearningController {
             correctAnswerForCurrPos = "";
             lastAnswerWrong = false;
         }
-
     }
 
     @FXML public Button startBtn;
@@ -131,18 +118,18 @@ public class TabLearningController {
             correctCounter.setText("0");
             wrongCounter.setText("0");
             SessionContainer.resetVariables();
-
-        }else{
-            startBtn.setText("Stop learning");
-            startBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
-            enterBtn.setDisable(false);
-            englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(),"normaltext");
-            polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"normaltext");
-            wordsPerSessionField.setDisable(true);
-            e2pRadio.setDisable(true);
-            p2eRadio.setDisable(true);
-            answerField.requestFocus();
+            return;
         }
+
+        startBtn.setText("Stop learning");
+        startBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
+        enterBtn.setDisable(false);
+        englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(),"normaltext");
+        polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"normaltext");
+        wordsPerSessionField.setDisable(true);
+        e2pRadio.setDisable(true);
+        p2eRadio.setDisable(true);
+        answerField.requestFocus();
     }
 
     private void toggleSessionState() {
@@ -193,32 +180,35 @@ public class TabLearningController {
                 displayNextPosition();
                 return;
             }
-            SessionContainer.wrongAnswers++;
-            wrongCounter.setText(String.valueOf(SessionContainer.wrongAnswers));
-            System.out.println("wrong!!!");
-            SessionContainer.lastAnswerWrong = true;
-
-
-            if(SessionContainer.translationMode == WordEntry.ENG_2_POL) {
-                int lengthWrongAns = answerField.getText().length();
-                polishWordLabel.replaceText(answerField.getText() + "  " + correctAnswer);
-                polishWordLabel.setStyleClass(0, lengthWrongAns,"textStrikeThrough");
-                polishWordLabel.setStyleClass(lengthWrongAns + 2, polishWordLabel.getLength(),"redtext");
-            }
-             else {
-                int lengthWrongAns = answerField.getText().length();
-                englishWordLabel.replaceText(answerField.getText() + "  " + correctAnswer);
-                englishWordLabel.setStyleClass(0, lengthWrongAns,"textStrikeThrough");
-                englishWordLabel.setStyleClass(lengthWrongAns + 2, englishWordLabel.getLength(),"redtext");
-            }
-
-            enterBtn.setText("Next");
-            enterBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
+            handleWrongAnswer(correctAnswer);
             return;
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "The word you wrote is empty. Please give your answer.", ButtonType.OK);
         alert.showAndWait();
+
+    }
+
+    private void handleWrongAnswer(String correctAnswer) {
+        SessionContainer.wrongAnswers++;
+        wrongCounter.setText(String.valueOf(SessionContainer.wrongAnswers));
+        System.out.println("Wrong Answer!");
+        SessionContainer.lastAnswerWrong = true;
+        enterBtn.setText("Next");
+        enterBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
+
+        if(SessionContainer.translationMode == WordEntry.ENG_2_POL) {
+            int lengthWrongAns = answerField.getText().length();
+            polishWordLabel.replaceText(answerField.getText() + "  " + correctAnswer);
+            polishWordLabel.setStyleClass(0, lengthWrongAns,"textStrikeThrough");
+            polishWordLabel.setStyleClass(lengthWrongAns + 2, polishWordLabel.getLength(),"redtext");
+            return;
+        }
+
+        int lengthWrongAns = answerField.getText().length();
+        englishWordLabel.replaceText(answerField.getText() + "  " + correctAnswer);
+        englishWordLabel.setStyleClass(0, lengthWrongAns,"textStrikeThrough");
+        englishWordLabel.setStyleClass(lengthWrongAns + 2, englishWordLabel.getLength(),"redtext");
 
     }
 
@@ -234,14 +224,14 @@ public class TabLearningController {
             englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(),"normaltext");
             polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"normaltext");
         }
-        else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Session finished. your score: \n" + "Correct Answers: "
-                    + SessionContainer.correctAnswers + "\nWrong Answers: " + SessionContainer.wrongAnswers , ButtonType.OK);
-            alert.showAndWait();
-            onStartBtnClicked();
-            startBtn.requestFocus();
-            correctCounter.setText("0");
-            wrongCounter.setText("0");
-        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Session finished. your score: \n" + "Correct Answers: "
+                + SessionContainer.correctAnswers + "\nWrong Answers: " + SessionContainer.wrongAnswers , ButtonType.OK);
+        alert.showAndWait();
+        onStartBtnClicked();
+        startBtn.requestFocus();
+        correctCounter.setText("0");
+        wrongCounter.setText("0");
+
     }
 }

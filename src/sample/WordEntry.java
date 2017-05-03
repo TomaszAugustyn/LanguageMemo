@@ -2,7 +2,6 @@ package sample;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
 import java.util.Arrays;
 import java.util.List;
 

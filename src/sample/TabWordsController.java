@@ -12,7 +12,9 @@ import java.io.File;
 import java.util.EventObject;
 
 /**
- * Created by Tomek on 28.03.2017.
+ * This is a class for controlling "Words" tab responsible for
+ * managing words/translations dictionary
+ * @author Tomasz Augustyn
  */
 public class TabWordsController {
 
@@ -29,7 +31,6 @@ public class TabWordsController {
     @FXML private TableView<WordEntry> table = new TableView<WordEntry>();
     @FXML private TableColumn<WordEntry, String> wordColumn;
     @FXML private TableColumn<WordEntry, String> translationColumn;
-    @FXML private Region addAndDeleteRegion;
     @FXML private ToggleSwitch toggle;
     @FXML private Label label;
 
@@ -43,7 +44,6 @@ public class TabWordsController {
         setToggleSwitchOnMouseClicked();
         wordField.setPopupEnabled(false);   //program start in AddWord mode, so we disable the popup
         translationField.setPopupEnabled(false);    //program start in AddWord mode, so we disable the popup
-        //addAndDeleteRegion.setStyle("-fx-background-color: #ff4855");
 
         table.setOnMouseClicked(mc -> {
             if(!toggle.isSelected()){
@@ -195,9 +195,6 @@ public class TabWordsController {
         data = FXCollections.observableArrayList(wordEntryList.getWordsList());
         table.setItems(data);
         table.getColumns().addAll(wordColumn, translationColumn);
-
-        /*data.removeAll();
-        data.addAll(wordEntryList.getWordsList());*/
 
     }
 

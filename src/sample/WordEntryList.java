@@ -2,15 +2,14 @@ package sample;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * This is WordEntryList class that manages word and translation entries used in the application
+ * This is WordEntryList class that manages word and
+ * translation entries used in the application
  * @author Tomasz Augustyn
  */
 public class WordEntryList {
@@ -31,7 +30,7 @@ public class WordEntryList {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText("Information");
-        alert.setContentText("Nastia! Word or translation cannot be empty!");
+        alert.setContentText("Word or translation cannot be empty!");
         alert.showAndWait().ifPresent(rs -> {
             if (rs == ButtonType.OK) {
                 System.out.println("Pressed OK.");
