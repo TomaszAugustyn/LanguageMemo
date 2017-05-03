@@ -2,12 +2,14 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import org.fxmisc.richtext.*;
 
+import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,8 @@ public class TabLearningController {
     @FXML private Label correctCounter;
     @FXML private Label wrongCounter;
     @FXML private Button enterBtn;
+    @FXML private ImageView thumbUp;
+    @FXML private ImageView thumbDown;
 
     private ToggleGroup toggleGroup = new ToggleGroup();
     private WordEntryList wordEntryList;
@@ -84,6 +88,8 @@ public class TabLearningController {
         polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"welcometext2");
         polishWordLabel.setStyle("-fx-background-color: transparent;");
         englishWordLabel.setStyle("-fx-background-color: transparent;");
+        thumbUp.setImage(new Image("sample/resources/logo/thumbUp.png"));
+        thumbDown.setImage(new Image("sample/resources/logo/thumbDown.png"));
 
         wordsPerSessionField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() < 5 && newValue.matches("\\d*")) {
@@ -230,7 +236,7 @@ public class TabLearningController {
         }
         else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Session finished. your score: \n" + "Correct Answers: "
-                    + SessionContainer.correctAnswers + "\n Wrong Answers: " + SessionContainer.wrongAnswers , ButtonType.OK);
+                    + SessionContainer.correctAnswers + "\nWrong Answers: " + SessionContainer.wrongAnswers , ButtonType.OK);
             alert.showAndWait();
             onStartBtnClicked();
             startBtn.requestFocus();

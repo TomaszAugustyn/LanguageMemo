@@ -44,9 +44,9 @@ public class Main extends Application {
         loader.setController(this);
         root = loader.load();
         scene = new Scene(root);
-        stage.setTitle("NastiaMemo");
+        stage.setTitle("LanguageMemo");
         stage.getIcons().add(new Image("sample/resources/logo/LM.png"));
-        image.setImage(new Image("sample/resources/logo/NastiaMemo.png"));
+        image.setImage(new Image("sample/resources/logo/LanguageMemo.png"));
         stage.setScene(scene);
         stage.show();
         scene.getStylesheets().add("sample/resources/mySwitch.css");

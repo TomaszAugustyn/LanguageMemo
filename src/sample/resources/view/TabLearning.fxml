@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.fxmisc.richtext.StyleClassedTextArea?>
@@ -22,14 +23,16 @@
       <TextField fx:id="answerField" layoutX="226.0" layoutY="293.0" prefHeight="25.0" prefWidth="220.0" />
       <Label alignment="TOP_LEFT" layoutX="226.0" layoutY="270.0" prefHeight="17.0" prefWidth="138.0" text="Your answer:" />
       <Button fx:id="enterBtn" layoutX="474.0" layoutY="292.0" mnemonicParsing="false" onAction="#onEnterBtnClicked" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: mediumpurple; -fx-border-color: black;" text="Enter" />
-      <Label fx:id="correctCounter" alignment="CENTER" layoutX="27.0" layoutY="288.0" prefHeight="45.0" prefWidth="58.0" text="0" textFill="#11bc05">
+      <Label fx:id="correctCounter" alignment="CENTER" layoutX="28.0" layoutY="289.0" prefHeight="45.0" prefWidth="58.0" text="0" textFill="#11bc05">
          <font>
             <Font size="26.0" />
          </font></Label>
-      <Label fx:id="wrongCounter" alignment="CENTER" layoutX="107.0" layoutY="288.0" prefHeight="45.0" prefWidth="58.0" text="0" textFill="#e40707">
+      <Label fx:id="wrongCounter" alignment="CENTER" layoutX="107.0" layoutY="289.0" prefHeight="45.0" prefWidth="58.0" text="0" textFill="#e40707">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
+      <ImageView fx:id="thumbUp" fitHeight="80.0" fitWidth="70.0" layoutX="29.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="thumbDown" fitHeight="80.0" fitWidth="70.0" layoutX="108.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

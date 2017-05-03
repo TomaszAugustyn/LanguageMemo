@@ -1,1 +1,1 @@
-shoes,buty;phone,telefon;mirror,lustro;to work,pracować;to play,bawić się;
+shoes,buty;phone,telefon;mirror,lustro;to work,pracować;to play,bawić się;teacher,nauczyciel;
