@@ -223,6 +223,7 @@ public class TabLearningController {
             enterBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
             englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(),"normaltext");
             polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"normaltext");
+            return;
         }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Session finished. your score: \n" + "Correct Answers: "
