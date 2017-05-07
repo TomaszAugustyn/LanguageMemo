@@ -107,6 +107,9 @@ public class TabLearningController {
         if(SessionContainer.sessionStarted){
             startBtn.setText("Start learning");
             startBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
+            enterBtn.setText("Enter");
+            enterBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
+            answerField.clear();
             enterBtn.setDisable(true);
             englishWordLabel.replaceText("Press \"Start learning\"");
             polishWordLabel.replaceText("Press \"Start learning\"");
