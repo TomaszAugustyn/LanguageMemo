@@ -39,6 +39,10 @@ public class TabLearningController {
             correctAnswerForCurrPos = "";
             lastAnswerWrong = false;
         }
+
+        private static void toggleSessionState(){
+            sessionStarted = !sessionStarted;
+        }
     }
 
     @FXML public Button startBtn;
@@ -84,7 +88,7 @@ public class TabLearningController {
 
     @FXML private void onStartBtnClicked(){
         adjustControlsToSessionState();
-        toggleSessionState();
+        SessionContainer.toggleSessionState();
 
         if(SessionContainer.sessionStarted){
             wordEntryList = main.getWordEntryList();
@@ -137,10 +141,6 @@ public class TabLearningController {
         p2eRadio.setDisable(false);
         correctCounter.setText("0");
         wrongCounter.setText("0");
-    }
-
-    private void toggleSessionState() {
-        SessionContainer.sessionStarted = !SessionContainer.sessionStarted;
     }
 
     private int getNrOfWordsPerSession() {
@@ -241,8 +241,6 @@ public class TabLearningController {
         alert.showAndWait();
         onStartBtnClicked();
         startBtn.requestFocus();
-        correctCounter.setText("0");
-        wrongCounter.setText("0");
 
     }
 }
