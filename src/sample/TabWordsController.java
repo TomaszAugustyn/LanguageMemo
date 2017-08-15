@@ -21,8 +21,9 @@ public class TabWordsController {
     private Main main;
     private File loadedFile;
     private WordEntryList wordEntryList;
-
     private ObservableList<WordEntry> data;
+    private final int WORD_COLUMN_DEFAULT_WIDTH = 125;
+    private final int TRANSLATION_COLUMN_DEFAULT_WIDTH = 122;
 
     @FXML private AutoCompleteTextField wordField;
     @FXML private AutoCompleteTextField translationField;
@@ -130,13 +131,8 @@ public class TabWordsController {
         String translation = translationField.getText();
         WordEntry wordEntry = new WordEntry(word, translation);
 
-        if(word.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word field must not be empty.", ButtonType.OK);
-            alert.showAndWait();
-            return;
-        }
-        if(translation.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Translation field must not be empty.", ButtonType.OK);
+        if(word.isEmpty() || translation.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word and Translation fields must not be empty.", ButtonType.OK);
             alert.showAndWait();
             return;
         }
@@ -158,13 +154,8 @@ public class TabWordsController {
         String translation = translationField.getText();
         WordEntry wordEntry = new WordEntry(word, translation);
 
-        if(word.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word field must not be empty. Click on the table to load a word entry.", ButtonType.OK);
-            alert.showAndWait();
-            return;
-        }
-        if(translation.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Translation field must not be empty. Click on the table to load a word entry.", ButtonType.OK);
+        if(word.isEmpty() || translation.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word and Translation fields must not be empty. Click on the table to load a word entry.", ButtonType.OK);
             alert.showAndWait();
             return;
         }
@@ -201,8 +192,8 @@ public class TabWordsController {
     private void initTable() {
         wordColumn = new TableColumn("Word");
         translationColumn = new TableColumn("Translation");
-        wordColumn.impl_setWidth(125);
-        translationColumn.impl_setWidth(122);
+        wordColumn.impl_setWidth(WORD_COLUMN_DEFAULT_WIDTH);
+        translationColumn.impl_setWidth(TRANSLATION_COLUMN_DEFAULT_WIDTH);
 
         wordColumn.setCellValueFactory(
                 new PropertyValueFactory<WordEntry,String>("Word")
@@ -210,7 +201,6 @@ public class TabWordsController {
         translationColumn.setCellValueFactory(
                 new PropertyValueFactory<WordEntry,String>("Translation")
         );
-
 
     }
 

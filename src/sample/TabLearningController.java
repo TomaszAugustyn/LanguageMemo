@@ -18,7 +18,6 @@ import static java.lang.Math.min;
  */
 public class TabLearningController {
 
-
     private static class SessionContainer{
         private static boolean sessionStarted = false;
         private static int nrOfWordsPerSession = 0;
@@ -55,9 +54,9 @@ public class TabLearningController {
     @FXML private ImageView thumbUp;
     @FXML private ImageView thumbDown;
 
+    private static final int MAX_NR_OF_DIGITS_IN_WORDS_PER_SESSION_FIELD = 4;
     private ToggleGroup toggleGroup = new ToggleGroup();
     private WordEntryList wordEntryList;
-
     private Main main;
 
     public void init(Main mainController) {
@@ -66,26 +65,21 @@ public class TabLearningController {
 
         p2eRadio.setToggleGroup(toggleGroup);
         e2pRadio.setToggleGroup(toggleGroup);
-        p2eRadio.setSelected(true);
-        enterBtn.setDisable(true);
-        enterBtn.setDefaultButton(true);
-        englishWordLabel.replaceText("Press \"Start learning\"");
-        polishWordLabel.replaceText("Press \"Start learning\"");
-        englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(), "welcometext1");
-        polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"welcometext2");
-        polishWordLabel.setStyle("-fx-background-color: transparent;");
-        englishWordLabel.setStyle("-fx-background-color: transparent;");
         thumbUp.setImage(new Image("sample/resources/logo/thumbUp.png"));
         thumbDown.setImage(new Image("sample/resources/logo/thumbDown.png"));
+        polishWordLabel.setStyle("-fx-background-color: transparent;");
+        englishWordLabel.setStyle("-fx-background-color: transparent;");
+        enterBtn.setDefaultButton(true);
+        p2eRadio.setSelected(true);
+        setControlsStyleToStopped();
 
         wordsPerSessionField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() < 5 && newValue.matches("\\d*")) {
+            if (newValue.length() <= MAX_NR_OF_DIGITS_IN_WORDS_PER_SESSION_FIELD && newValue.matches("\\d*")) {
                 return;
             }
             wordsPerSessionField.setText(oldValue);
             wordsPerSessionField.positionCaret(wordsPerSessionField.getLength());
         });
-
     }
 
     @FXML private void onStartBtnClicked(){
@@ -105,25 +99,15 @@ public class TabLearningController {
 
     private void adjustControlsToSessionState() {
         if(SessionContainer.sessionStarted){
-            startBtn.setText("Start learning");
-            startBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
-            enterBtn.setText("Enter");
-            enterBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
-            answerField.clear();
-            enterBtn.setDisable(true);
-            englishWordLabel.replaceText("Press \"Start learning\"");
-            polishWordLabel.replaceText("Press \"Start learning\"");
-            englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(), "welcometext1");
-            polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"welcometext2");
-            wordsPerSessionField.setDisable(false);
-            e2pRadio.setDisable(false);
-            p2eRadio.setDisable(false);
-            correctCounter.setText("0");
-            wrongCounter.setText("0");
+            setControlsStyleToStopped();
             SessionContainer.resetVariables();
             return;
         }
 
+        setControlsStyleToStarted();
+    }
+
+    private void setControlsStyleToStarted() {
         startBtn.setText("Stop learning");
         startBtn.setStyle("-fx-background-color: #ff4855; -fx-border-color: black;");
         enterBtn.setDisable(false);
@@ -132,7 +116,27 @@ public class TabLearningController {
         wordsPerSessionField.setDisable(true);
         e2pRadio.setDisable(true);
         p2eRadio.setDisable(true);
+        answerField.setDisable(false);
         answerField.requestFocus();
+    }
+
+    private void setControlsStyleToStopped() {
+        startBtn.setText("Start learning");
+        startBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
+        enterBtn.setText("Enter");
+        enterBtn.setStyle("-fx-background-color: mediumpurple; -fx-border-color: black;");
+        answerField.clear();
+        answerField.setDisable(true);
+        enterBtn.setDisable(true);
+        englishWordLabel.replaceText("Press \"Start learning\"");
+        polishWordLabel.replaceText("Press \"Start learning\"");
+        englishWordLabel.setStyleClass(0, englishWordLabel.getText().length(), "welcometext1");
+        polishWordLabel.setStyleClass(0, polishWordLabel.getText().length(),"welcometext2");
+        wordsPerSessionField.setDisable(false);
+        e2pRadio.setDisable(false);
+        p2eRadio.setDisable(false);
+        correctCounter.setText("0");
+        wrongCounter.setText("0");
     }
 
     private void toggleSessionState() {
@@ -167,6 +171,7 @@ public class TabLearningController {
         if(SessionContainer.lastAnswerWrong){
 
             answerField.clear();
+            answerField.requestFocus();
             enterBtn.setText("Enter");
             SessionContainer.lastAnswerWrong = false;
             displayNextPosition();
@@ -180,6 +185,7 @@ public class TabLearningController {
                 correctCounter.setText(String.valueOf(SessionContainer.correctAnswers));
                 System.out.println("Correct Answer!");
                 answerField.clear();
+                answerField.requestFocus();
                 displayNextPosition();
                 return;
             }
@@ -189,6 +195,7 @@ public class TabLearningController {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "The word you wrote is empty. Please give your answer.", ButtonType.OK);
         alert.showAndWait();
+        answerField.requestFocus();
 
     }
 
