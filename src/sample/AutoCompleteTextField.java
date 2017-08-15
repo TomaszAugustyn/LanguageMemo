@@ -55,43 +55,35 @@ public class AutoCompleteTextField extends TextField
         super();
         entries = new TreeSet<>();
         entriesPopup = new ContextMenu();
-        textProperty().addListener(new ChangeListener<String>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
-                if (getText() != null)
+
+        textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (getText() != null)
+            {
+                if (getText().length() == 0)
                 {
-                    if (getText().length() == 0)
+                    entriesPopup.hide();
+                } else
+                {
+                    List<String> searchResult = new ArrayList<>();
+                    final List<String> filteredEntries = entries.stream().filter(e -> e.toLowerCase().contains(getText().toLowerCase())).collect(Collectors.toList());
+                    searchResult.addAll(filteredEntries);
+                    if (entries.size() > 0)
                     {
-                        entriesPopup.hide();
+                        populatePopup(searchResult);
+                        if (!entriesPopup.isShowing() && enabledPopup)
+                        {
+                            entriesPopup.show(AutoCompleteTextField.this, Side.BOTTOM, 0, 0);
+                        }
                     } else
                     {
-                        LinkedList<String> searchResult = new LinkedList<>();
-                        final List<String> filteredEntries = entries.stream().filter(e -> e.toLowerCase().contains(getText().toLowerCase())).collect(Collectors.toList());
-                        searchResult.addAll(filteredEntries);
-                        if (entries.size() > 0)
-                        {
-                            populatePopup(searchResult);
-                            if (!entriesPopup.isShowing() && enabledPopup)
-                            {
-                                entriesPopup.show(AutoCompleteTextField.this, Side.BOTTOM, 0, 0);
-                            }
-                        } else
-                        {
-                            entriesPopup.hide();
-                        }
+                        entriesPopup.hide();
                     }
                 }
-
             }
+
         });
 
-        focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean aBoolean2) {
-                entriesPopup.hide();
-            }
-        });
+        focusedProperty().addListener((observableValue, aBoolean, aBoolean2) -> entriesPopup.hide());
 
     }
 

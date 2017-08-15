@@ -13,8 +13,12 @@ public class WordEntry {
 
     private StringProperty word;
     private StringProperty  translation;
+
     public static final int ENG_2_POL = 0;
     public static final int POL_2_ENG = 1;
+    public static final String WORD_TRANSLATION_SEPARATOR = ",";
+    public static final String NEW_LINE_SEPARATOR = ";";
+
 
     public WordEntry(String word, String translation) {
         this.word = new SimpleStringProperty(word);
@@ -39,40 +43,22 @@ public class WordEntry {
     }
 
 
-    @SuppressWarnings("Duplicates")
-    public WordEntry convertWordEntryToUnderscores(int conversionType) throws IllegalArgumentException{
+    public WordEntry convertWordEntryToUnderscores(int conversionType) {
         String word = this.getWord();
         String translation = this.getTranslation();
 
-        if(conversionType == ENG_2_POL && !this.isWordOrTranslationEmpty()){
-
-            String modifiedTranslation = "";
-            List<String> items = Arrays.asList(translation.split("\\s+"));
-            for (String s : items) {
-                String underscoredStr = s.replaceAll("[\\S]", "_ ");
-                String modifiedStr = String.valueOf(s.charAt(0))
-                        + underscoredStr.substring(1, underscoredStr.length());
-                modifiedTranslation = new StringBuilder().append(modifiedTranslation).append(modifiedStr).append("  ").toString();
-            }
-
-            return new WordEntry(word, modifiedTranslation);
+        String wordOrTranslation = conversionType == ENG_2_POL ? translation : word;
+        String modified = "";
+        List<String> items = Arrays.asList(wordOrTranslation.split("\\s+"));
+        for (String s : items) {
+            String underscoredStr = s.replaceAll("[\\S]", "_ ");
+            String modifiedSingle = String.valueOf(s.charAt(0))
+                    + underscoredStr.substring(1, underscoredStr.length());
+            modified = new StringBuilder().append(modified).append(modifiedSingle).append("  ").toString();
         }
 
-       if(conversionType == POL_2_ENG && !this.isWordOrTranslationEmpty()){
+        return conversionType == ENG_2_POL ? new WordEntry(word, modified) : new WordEntry(modified, translation);
 
-           String modifiedWord = "";
-           List<String> items = Arrays.asList(word.split("\\s+"));
-           for (String s : items) {
-               String underscoredStr = s.replaceAll("[\\S]", "_ ");
-               String modifiedStr = String.valueOf(s.charAt(0))
-                       + underscoredStr.substring(1, underscoredStr.length());
-               modifiedWord = new StringBuilder().append(modifiedWord).append(modifiedStr).append("  ").toString();
-           }
-
-            return new WordEntry(modifiedWord, translation);
-        }
-
-        throw new IllegalArgumentException();
     }
 
     public boolean isWordOrTranslationEmpty(){

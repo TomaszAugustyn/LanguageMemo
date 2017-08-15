@@ -30,7 +30,6 @@ public class Main extends Application {
     private WordEntryList initialWordEntryList;
     private File loadedFile;
 
-
     @FXML private TabLearningController tabLearningController;
     @FXML private TabWordsController tabWordsController;
     @FXML private TextField filePath;
@@ -90,7 +89,7 @@ public class Main extends Application {
 
         String streamedString = wordEntryList.getWordsList()
                 .stream()
-                .map(wordEntry -> wordEntry.getWord() + "," + wordEntry.getTranslation() + ";")
+                .map(wordEntry -> wordEntry.getWord() + WordEntry.WORD_TRANSLATION_SEPARATOR + wordEntry.getTranslation() + WordEntry.NEW_LINE_SEPARATOR)
                 .collect(Collectors.joining());
         try {
             FileWriter fileWriter = new FileWriter(loadedFile, false);
@@ -117,13 +116,11 @@ public class Main extends Application {
             initialWordEntryList = getWordEntryListFromFile(loadedFile);
             tabWordsController.afterWordsListChanged();
         }
-        catch(NullPointerException e) {
-            e.printStackTrace();
-        }
         catch (FileNotFoundException e){
             e.printStackTrace();
             System.out.println("File not found.");
         }
+
     }
 
 
@@ -135,11 +132,11 @@ public class Main extends Application {
 
         while (scanner.hasNextLine()) {
             line = scanner.nextLine();
-            if(line.contains(";")){
-                List<String> colonList = new ArrayList<String>(Arrays.asList(line.split(";")));
+            if(line.contains(WordEntry.NEW_LINE_SEPARATOR)){
+                List<String> colonList = new ArrayList<String>(Arrays.asList(line.split(WordEntry.NEW_LINE_SEPARATOR)));
                 for (String s : colonList) {
-                    if(s.contains(",")){
-                        List<String> comaList = new ArrayList<String>(Arrays.asList(s.split(",")));
+                    if(s.contains(WordEntry.WORD_TRANSLATION_SEPARATOR)){
+                        List<String> comaList = new ArrayList<String>(Arrays.asList(s.split(WordEntry.WORD_TRANSLATION_SEPARATOR)));
                         WordEntry wordEntry = new WordEntry(comaList.get(0), comaList.get(1));
                         wordEntryListLocal.addWord(wordEntry);
                     }

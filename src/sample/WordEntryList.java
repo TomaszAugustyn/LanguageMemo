@@ -16,7 +16,7 @@ public class WordEntryList {
 
     private List<WordEntry> wordsList = new ArrayList<>();
 
-    public static enum eEntries{
+    public enum eEntries{
         WORD, TRANSLATION
     }
 
@@ -44,11 +44,7 @@ public class WordEntryList {
     }
 
     public boolean isWordEntryOnList(WordEntry wordEntry){
-        for (WordEntry w : wordsList) {
-            if (wordEntry.equals(w))
-                return true;
-        }
-        return false;
+        return wordsList.stream().anyMatch(wordEntry::equals);
     }
 
     public long getCount(){
@@ -94,7 +90,7 @@ public class WordEntryList {
 
     public List<WordEntry> getNRandomUniqueWordEntries(int n) throws IllegalArgumentException{
         if(n > getCount())
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Method has been used with argument \"n\" exceeding the size of word entry list.");
 
         List<WordEntry> wordsListCopy = new ArrayList<>(wordsList);
         Collections.shuffle(wordsListCopy);
