@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.*;
@@ -35,6 +36,13 @@ public class Main extends Application {
     @FXML private TextField filePath;
     @FXML private Button fileChooser;
     @FXML private ImageView image;
+    @FXML private Label pathLabel;
+    @FXML private Pane filePathPane;
+
+    private static final double MIN_STAGE_WIDTH = 730.0;
+    private static final double MIN_STAGE_HEIGHT = 515.0;
+    private static final double DEFAULT_DIVIDER_POSITION = 0.3785;
+    private static final int GAP_BETWEEN_LABEL_AND_FILEPATH = 20;
 
     @Override
     public void start(Stage stage) throws Exception{
@@ -43,6 +51,8 @@ public class Main extends Application {
         root = loader.load();
         scene = new Scene(root);
         stage.setTitle("LanguageMemo");
+        stage.setMinWidth(MIN_STAGE_WIDTH);
+        stage.setMinHeight(MIN_STAGE_HEIGHT);
         stage.getIcons().add(new Image("sample/resources/logo/LM.png"));
         image.setImage(new Image("sample/resources/logo/LanguageMemo.png"));
         stage.setScene(scene);
@@ -61,9 +71,35 @@ public class Main extends Application {
             checkConditionAndWriteFileFromList();
         });
 
+        addHeightAndWidthListeners();
         tabLearningController.init(this);
         tabWordsController.init(this);
 
+    }
+
+    private void addHeightAndWidthListeners() {
+        scene.widthProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    Double dxWidth = (Double)newValue - (Double)oldValue;
+                    filePath.setPrefWidth(filePath.getWidth() + dxWidth);
+                    fileChooser.setLayoutX(fileChooser.getLayoutX() + dxWidth);
+                    tabWordsController.splitPane.setPrefWidth(tabWordsController.splitPane.getWidth() + dxWidth);
+                    tabWordsController.addAndDeleteRegion.setPrefWidth(tabWordsController.addAndDeleteRegion.getWidth() + dxWidth);
+                    tabWordsController.table.setPrefWidth((Double)newValue*DEFAULT_DIVIDER_POSITION);
+                    tabWordsController.splitPane.setDividerPositions(tabWordsController.table.getWidth());
+                });
+
+        scene.heightProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    Double dxHeight = (Double)newValue - (Double)oldValue;
+                    filePath.setLayoutY(filePathPane.getHeight()/2 - filePath.getHeight()/2);
+                    fileChooser.setLayoutY(filePathPane.getHeight()/2 - filePath.getHeight()/2);
+                    pathLabel.setLayoutY(filePathPane.getHeight()/2 - filePath.getHeight()/2 - GAP_BETWEEN_LABEL_AND_FILEPATH);
+                    image.setLayoutY(filePathPane.getHeight()/2 - image.getFitHeight()/2);
+                    tabWordsController.splitPane.setPrefHeight(tabWordsController.splitPane.getHeight() + dxHeight);
+                    tabWordsController.addAndDeleteRegion.setPrefHeight(tabWordsController.addAndDeleteRegion.getHeight() + dxHeight);
+                    tabWordsController.table.setPrefHeight(tabWordsController.table.getHeight() + dxHeight);
+                });
     }
 
     public static void main(String[] args) {
@@ -105,7 +141,6 @@ public class Main extends Application {
     @FXML public void onOpenChooser(){
 
         checkConditionAndWriteFileFromList();
-
         FileChooser chooser = new FileChooser();
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Memo text files", "*.txt"));
         chooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));

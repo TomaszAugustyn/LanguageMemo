@@ -25,15 +25,17 @@ public class TabWordsController {
     private final int WORD_COLUMN_DEFAULT_WIDTH = 125;
     private final int TRANSLATION_COLUMN_DEFAULT_WIDTH = 122;
 
-    @FXML private AutoCompleteTextField wordField;
-    @FXML private AutoCompleteTextField translationField;
-    @FXML private Button deleteWordBtn;
-    @FXML private Button addWordBtn;
-    @FXML private TableView<WordEntry> table = new TableView<WordEntry>();
-    @FXML private TableColumn<WordEntry, String> wordColumn;
-    @FXML private TableColumn<WordEntry, String> translationColumn;
-    @FXML private ToggleSwitch toggle;
-    @FXML private Label label;
+    @FXML public AutoCompleteTextField wordField;
+    @FXML public AutoCompleteTextField translationField;
+    @FXML public Button deleteWordBtn;
+    @FXML public Button addWordBtn;
+    @FXML public TableView<WordEntry> table = new TableView<WordEntry>();
+    @FXML public TableColumn<WordEntry, String> wordColumn;
+    @FXML public TableColumn<WordEntry, String> translationColumn;
+    @FXML public ToggleSwitch toggle;
+    @FXML public Label label;
+    @FXML public Region addAndDeleteRegion;
+    @FXML public SplitPane splitPane;
 
     public void init(Main mainController){
         this.main = mainController;
