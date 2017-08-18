@@ -38,6 +38,7 @@ public class Main extends Application {
     @FXML private ImageView image;
     @FXML private Label pathLabel;
     @FXML private Pane filePathPane;
+    @FXML private TabPane tabPane;
 
     private static final double MIN_STAGE_WIDTH = 730.0;
     private static final double MIN_STAGE_HEIGHT = 515.0;
@@ -96,10 +97,15 @@ public class Main extends Application {
                     fileChooser.setLayoutY(filePathPane.getHeight()/2 - filePath.getHeight()/2);
                     pathLabel.setLayoutY(filePathPane.getHeight()/2 - filePath.getHeight()/2 - GAP_BETWEEN_LABEL_AND_FILEPATH);
                     image.setLayoutY(filePathPane.getHeight()/2 - image.getFitHeight()/2);
+                    if(dxHeight > 0){
+                        tabPane.setPrefHeight(tabPane.getHeight() + dxHeight);
+                        filePathPane.setPrefHeight(filePathPane.getHeight() + dxHeight);
+                    }
                     tabWordsController.splitPane.setPrefHeight(tabWordsController.splitPane.getHeight() + dxHeight);
                     tabWordsController.addAndDeleteRegion.setPrefHeight(tabWordsController.addAndDeleteRegion.getHeight() + dxHeight);
                     tabWordsController.table.setPrefHeight(tabWordsController.table.getHeight() + dxHeight);
                 });
+
     }
 
     public static void main(String[] args) {

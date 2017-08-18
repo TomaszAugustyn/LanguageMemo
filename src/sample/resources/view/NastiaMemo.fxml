@@ -54,7 +54,7 @@
             <Label fx:id="pathLabel" layoutX="135.0" layoutY="11.0" text="Path to text file:" />
             <ImageView fx:id="image" fitHeight="83.0" fitWidth="114.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
          </children></Pane>
-      <TabPane prefHeight="486.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" prefHeight="486.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Words Database">
                <content>
