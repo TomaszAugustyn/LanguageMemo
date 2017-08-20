@@ -50,8 +50,8 @@ public class TabLearningController {
     @FXML private RadioButton e2pRadio;
     @FXML private TextField wordsPerSessionField;
     @FXML private TextField answerField;
-    @FXML private StyleClassedTextArea englishWordLabel;
-    @FXML private StyleClassedTextArea polishWordLabel;
+    @FXML public StyleClassedTextArea englishWordLabel;
+    @FXML public StyleClassedTextArea polishWordLabel;
     @FXML private Label correctCounter;
     @FXML private Label wrongCounter;
     @FXML private Button enterBtn;

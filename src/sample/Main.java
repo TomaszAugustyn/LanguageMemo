@@ -88,15 +88,13 @@ public class Main extends Application {
                     tabWordsController.addAndDeleteRegion.setPrefWidth(tabWordsController.addAndDeleteRegion.getWidth() + dxWidth);
                     tabWordsController.table.setPrefWidth((Double)newValue*DEFAULT_DIVIDER_POSITION);
                     tabWordsController.splitPane.setDividerPositions(tabWordsController.table.getWidth());
+                    tabLearningController.englishWordLabel.setPrefWidth(tabLearningController.englishWordLabel.getWidth() + dxWidth);
+                    tabLearningController.polishWordLabel.setPrefWidth(tabLearningController.polishWordLabel.getWidth() + dxWidth);
                 });
 
         scene.heightProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     Double dxHeight = (Double)newValue - (Double)oldValue;
-                    filePath.setLayoutY(filePathPane.getHeight()/2 - filePath.getHeight()/2);
-                    fileChooser.setLayoutY(filePathPane.getHeight()/2 - filePath.getHeight()/2);
-                    pathLabel.setLayoutY(filePathPane.getHeight()/2 - filePath.getHeight()/2 - GAP_BETWEEN_LABEL_AND_FILEPATH);
-                    image.setLayoutY(filePathPane.getHeight()/2 - image.getFitHeight()/2);
                     if(dxHeight > 0){
                         tabPane.setPrefHeight(tabPane.getHeight() + dxHeight);
                         filePathPane.setPrefHeight(filePathPane.getHeight() + dxHeight);
@@ -104,7 +102,14 @@ public class Main extends Application {
                     tabWordsController.splitPane.setPrefHeight(tabWordsController.splitPane.getHeight() + dxHeight);
                     tabWordsController.addAndDeleteRegion.setPrefHeight(tabWordsController.addAndDeleteRegion.getHeight() + dxHeight);
                     tabWordsController.table.setPrefHeight(tabWordsController.table.getHeight() + dxHeight);
+
                 });
+
+        // binding controls to filePathPane
+        filePath.layoutYProperty().bind((filePathPane.heightProperty().divide(2)).subtract(filePath.heightProperty().divide(2)) );
+        fileChooser.layoutYProperty().bind((filePathPane.heightProperty().divide(2)).subtract(filePath.heightProperty().divide(2)) );
+        pathLabel.layoutYProperty().bind((filePathPane.heightProperty().divide(2)).subtract(filePath.heightProperty().divide(2)).subtract(GAP_BETWEEN_LABEL_AND_FILEPATH) );
+        image.layoutYProperty().bind((filePathPane.heightProperty().divide(2)).subtract(image.fitHeightProperty().divide(2)) );
 
     }
 

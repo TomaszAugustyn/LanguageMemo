@@ -1,1 +1,1 @@
-shoes,buty;phone,telefon;mirror,lustro;to work,pracować;to play,bawić się;teacher,nauczyciel;
+shoes,buty;phone,telefon;mirror,lustro;to work,pracować;to play,bawić się;teacher,nauczyciel;This is a very very very very very very very very very very very long sentence,To jest bardzo bardzo bardzo bardzo bardzo bardzo bardzo bardzo bardzo bardzo długie zdanie;
