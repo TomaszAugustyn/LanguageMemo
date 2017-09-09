@@ -7,9 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import org.controlsfx.control.ToggleSwitch;
-
 import java.io.File;
 import java.util.EventObject;
+
 
 /**
  * This is a class for controlling "Words" tab responsible for
@@ -136,6 +136,10 @@ public class TabWordsController {
         if(word.isEmpty() || translation.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word and Translation fields must not be empty.", ButtonType.OK);
             alert.showAndWait();
+            if (word.isEmpty())
+                Main.vanishGlowEffect(this.wordField);
+            if (translation.isEmpty())
+                Main.vanishGlowEffect(this.translationField);
             return;
         }
         if(wordEntryList.isWordEntryOnList(wordEntry)){
@@ -159,6 +163,10 @@ public class TabWordsController {
         if(word.isEmpty() || translation.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Word and Translation fields must not be empty. Click on the table to load a word entry.", ButtonType.OK);
             alert.showAndWait();
+            if (word.isEmpty())
+                Main.vanishGlowEffect(this.wordField);
+            if (translation.isEmpty())
+                Main.vanishGlowEffect(this.translationField);
             return;
         }
         if(!wordEntryList.isWordEntryOnList(wordEntry)){
