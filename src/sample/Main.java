@@ -106,7 +106,6 @@ public class Main extends Application {
     {
         DropShadow vanishingShadow = (DropShadow)borderGlow.impl_copy();
         node.setEffect(vanishingShadow);
-        node.setEffect(vanishingShadow);
         final Timeline timeline = new Timeline();
         //timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setCycleCount(1);

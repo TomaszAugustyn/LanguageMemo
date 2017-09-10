@@ -141,6 +141,7 @@ public class TabLearningController {
         p2eRadio.setDisable(false);
         correctCounter.setText("0");
         wrongCounter.setText("0");
+        answerField.setEffect(null);
     }
 
     private int getNrOfWordsPerSession() {
