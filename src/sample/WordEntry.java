@@ -51,7 +51,7 @@ public class WordEntry {
         String modified = "";
         List<String> items = Arrays.asList(wordOrTranslation.split("\\s+"));
         for (String s : items) {
-            String underscoredStr = s.replaceAll("[\\S]", "_ ");
+            String underscoredStr = s.replaceAll("[\\S&&[^-]]", "_ ");
             String modifiedSingle = String.valueOf(s.charAt(0))
                     + underscoredStr.substring(1, underscoredStr.length());
             modified = new StringBuilder().append(modified).append(modifiedSingle).append("  ").toString();
