@@ -49,13 +49,12 @@ public class TabWordsController {
         translationField.setPopupEnabled(false);    //program start in AddWord mode, so we disable the popup
 
         table.setOnMouseClicked(mc -> {
-            if(!toggle.isSelected()){
-                WordEntry wordEntry = table.getSelectionModel().getSelectedItem();
-                wordField.setText(wordEntry.getWord());
-                wordField.hidePopup();
-                translationField.setText(wordEntry.getTranslation());
-                translationField.hidePopup();
+            tableSelectionChanged();
+        });
 
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null ) {
+                tableSelectionChanged();
             }
         });
 
@@ -212,6 +211,16 @@ public class TabWordsController {
                 new PropertyValueFactory<WordEntry,String>("Translation")
         );
 
+    }
+
+    private void tableSelectionChanged(){
+        if (!toggle.isSelected()) {
+            WordEntry wordEntry = table.getSelectionModel().getSelectedItem();
+            wordField.setText(wordEntry.getWord());
+            wordField.hidePopup();
+            translationField.setText(wordEntry.getTranslation());
+            translationField.hidePopup();
+        }
     }
 
 }
