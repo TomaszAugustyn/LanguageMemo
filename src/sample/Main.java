@@ -83,8 +83,10 @@ public class Main extends Application {
         wordEntryList = getWordEntryListFromFile(loadedFile);
         initialWordEntryList = getWordEntryListFromFile(loadedFile);
 
-        stage.setOnCloseRequest(we -> {
-            checkConditionAndWriteFileFromList();
+        stage.setOnCloseRequest(windowEvent -> {
+            if (!checkConditionAndWriteFileFromList()){
+                windowEvent.consume();
+            }
         });
 
         addHeightAndWidthListeners();
@@ -157,17 +159,26 @@ public class Main extends Application {
     }
 
 
-    private void checkConditionAndWriteFileFromList() {
+    private boolean checkConditionAndWriteFileFromList() {
         if(!wordEntryList.equals(initialWordEntryList))
         {
             String currentFilePath = filePath.getText();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save changes to \"" + currentFilePath +"\"?", ButtonType.YES, ButtonType.NO);
-            alert.showAndWait();
+            ButtonType fakeNoButton = new ButtonType("No", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save changes to \"" + currentFilePath +"\"?", ButtonType.YES, fakeNoButton, cancelButton);
+            Optional<ButtonType> result = alert.showAndWait();
 
-            if(alert.getResult() == ButtonType.YES) {
+            if(result.isPresent() && result.get() == ButtonType.YES) {
                 WriteFileFromWordEntryList(loadedFile);
+                return true;
             }
+            else if(result.isPresent() && result.get() == fakeNoButton) {
+                return true;
+            }
+            return false;
+
         }
+        return true;
     }
 
     private void WriteFileFromWordEntryList(File loadedFile) {
@@ -189,7 +200,9 @@ public class Main extends Application {
 
     @FXML public void onOpenChooser(){
 
-        checkConditionAndWriteFileFromList();
+        if (!checkConditionAndWriteFileFromList()){
+            return;
+        }
         FileChooser chooser = new FileChooser();
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Memo text files", "*.txt"));
         chooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
