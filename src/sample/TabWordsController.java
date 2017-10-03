@@ -147,7 +147,7 @@ public class TabWordsController {
             return;
         }
 
-        wordEntryList.addWord(new WordEntry(word, translation));
+        wordEntryList.addWord(new WordEntry(word.trim(), translation.trim()));
         afterWordsListChanged();
         wordField.clear();
         translationField.clear();
