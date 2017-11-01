@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -170,6 +171,7 @@ public class Main extends Application {
 
             if(result.isPresent() && result.get() == ButtonType.YES) {
                 WriteFileFromWordEntryList(loadedFile);
+                initialWordEntryList = wordEntryList;
                 return true;
             }
             else if(result.isPresent() && result.get() == fakeNoButton) {
@@ -217,10 +219,21 @@ public class Main extends Application {
             e.printStackTrace();
             System.out.println("File not found.");
         }
-
     }
 
+    @FXML public void onMenuItemChooseFile(){
+        onOpenChooser();
+    }
 
+    @FXML public void onMenuItemSave(){
+        checkConditionAndWriteFileFromList();
+    }
+
+    @FXML public void onMenuItemQuit(){
+        if (checkConditionAndWriteFileFromList()){
+            Platform.exit();
+        }
+    }
 
     private WordEntryList getWordEntryListFromFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream(file));
