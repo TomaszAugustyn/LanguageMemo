@@ -30,10 +30,10 @@
         </Menu>
         <Menu fx:id="menuActions" mnemonicParsing="false" text="Actions">
           <items>
-            <MenuItem mnemonicParsing="false" text="Change Mode" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemChangeMode" text="Change Mode" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Add Word" />
-            <MenuItem mnemonicParsing="false" text="Delete Word" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemAddWord" text="Add Word" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemDeleteWord" text="Delete Word" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Change Translation Direction" />
                   <MenuItem mnemonicParsing="false" text="Set Words per Learning" />

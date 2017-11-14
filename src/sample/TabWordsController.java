@@ -24,6 +24,8 @@ public class TabWordsController {
     private ObservableList<WordEntry> data;
     private final int WORD_COLUMN_DEFAULT_WIDTH = 125;
     private final int TRANSLATION_COLUMN_DEFAULT_WIDTH = 122;
+    public static double TOGGLE_SWITCH_BTN_POS_OFFSET_X = 0.75;
+    public static double TOGGLE_SWITCH_BTN_POS_OFFSET_Y = 0.50;
 
     @FXML public AutoCompleteTextField wordField;
     @FXML public AutoCompleteTextField translationField;
@@ -103,28 +105,32 @@ public class TabWordsController {
 
     private void setToggleSwitchOnMouseClicked() {
         toggle.setOnMouseClicked(t -> {
-            if (toggle.isSelected()){
-                toggle.setText("Add mode");
-                toggle.setStyle("-fx-base: limegreen");
-                addWordBtn.setDisable(false);
-                deleteWordBtn.setDisable(true);
-                wordField.setPopupEnabled(false);
-                translationField.setPopupEnabled(false);
-
-            }
-            else {
-                toggle.setText("Delete mode");
-                toggle.setStyle("-fx-base:  #ff4855");
-                addWordBtn.setDisable(true);
-                deleteWordBtn.setDisable(false);
-                wordField.setPopupEnabled(true);
-                translationField.setPopupEnabled(true);
-
-            }
-            wordField.clear();
-            translationField.clear();
+            toggleSwitchBtn();
             t.consume();
         });
+    }
+
+    public void toggleSwitchBtn() {
+        if (toggle.isSelected()){
+            toggle.setText("Add mode");
+            toggle.setStyle("-fx-base: limegreen");
+            addWordBtn.setDisable(false);
+            deleteWordBtn.setDisable(true);
+            wordField.setPopupEnabled(false);
+            translationField.setPopupEnabled(false);
+
+        }
+        else {
+            toggle.setText("Delete mode");
+            toggle.setStyle("-fx-base:  #ff4855");
+            addWordBtn.setDisable(true);
+            deleteWordBtn.setDisable(false);
+            wordField.setPopupEnabled(true);
+            translationField.setPopupEnabled(true);
+
+        }
+        wordField.clear();
+        translationField.clear();
     }
 
     public void onAddWordBtnClicked() {

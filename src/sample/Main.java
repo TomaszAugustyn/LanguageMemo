@@ -5,6 +5,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -234,6 +237,21 @@ public class Main extends Application {
             Platform.exit();
         }
     }
+
+    @FXML public void onMenuItemAddWord(){
+        tabWordsController.onAddWordBtnClicked();
+    }
+
+    @FXML public void onMenuItemDeleteWord(){
+        tabWordsController.onDeleteWordBtnClicked();
+    }
+
+    @FXML public void onMenuItemChangeMode(){
+        double offsetX = tabWordsController.toggle.getLayoutBounds().getWidth() * TabWordsController.TOGGLE_SWITCH_BTN_POS_OFFSET_X;
+        double offsetY = tabWordsController.toggle.getLayoutBounds().getHeight()* TabWordsController.TOGGLE_SWITCH_BTN_POS_OFFSET_Y;
+        Tools.simulateClick(tabWordsController.toggle, offsetX, offsetY);
+    }
+
 
     private WordEntryList getWordEntryListFromFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream(file));
