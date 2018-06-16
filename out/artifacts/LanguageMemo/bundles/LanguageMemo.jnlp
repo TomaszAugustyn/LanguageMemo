@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="LanguageMemo.jar" size="219975" download="eager" />
+    <jar href="LanguageMemo.jar" size="222144" download="eager" />
     <jar href="controlsfx-8.40.12.jar" size="996389" download="eager" />
     <jar href="controlsfx-samples-8.40.12.jar" size="665038" download="eager" />
     <jar href="fxsampler-1.0.9.jar" size="30952" download="eager" />

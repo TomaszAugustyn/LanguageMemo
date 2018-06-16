@@ -5,7 +5,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,8 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -26,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -193,9 +191,9 @@ public class Main extends Application {
                 .map(wordEntry -> wordEntry.getWord() + WordEntry.WORD_TRANSLATION_SEPARATOR + wordEntry.getTranslation() + WordEntry.NEW_LINE_SEPARATOR)
                 .collect(Collectors.joining());
         try {
-            FileWriter fileWriter = new FileWriter(loadedFile, false);
-            fileWriter.write(streamedString);
-            fileWriter.close();
+            Writer writer = new OutputStreamWriter(new FileOutputStream(loadedFile), StandardCharsets.UTF_8);
+            writer.write(streamedString);
+            writer.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -254,7 +252,7 @@ public class Main extends Application {
 
 
     private WordEntryList getWordEntryListFromFile(File file) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new FileInputStream(file));
+        Scanner scanner = new Scanner(new FileInputStream(file), "utf-8");
         String line = "";
         WordEntryList wordEntryListLocal = new WordEntryList();
 
