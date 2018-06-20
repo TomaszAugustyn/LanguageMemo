@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="476.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+      <menus>
+        <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="itemChooseFile" mnemonicParsing="false" onAction="#onMenuItemChooseFile" text="Choose file..." />
+            <MenuItem fx:id="itemSave" mnemonicParsing="false" onAction="#onMenuItemSave" text="Save" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="itemQuit" mnemonicParsing="false" onAction="#onMenuItemQuit" text="Quit" />
+          </items>
+        </Menu>
+        <Menu fx:id="menuActions" mnemonicParsing="false" text="Actions">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemChangeMode" text="Change Mode" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemAddWord" text="Add Word" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuItemDeleteWord" text="Delete Word" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Change Translation Direction" />
+                  <MenuItem mnemonicParsing="false" text="Set Words per Learning" />
+                  <MenuItem mnemonicParsing="false" text="Start Learning" />
+          </items>
+        </Menu>
+        <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About Me" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <Pane fx:id="filePathPane" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="filePath" layoutX="134.0" layoutY="32.0" prefHeight="27.0" prefWidth="315.0" />
+            <Button fx:id="fileChooser" layoutX="486.0" layoutY="32.0" mnemonicParsing="false" onAction="#onOpenChooser" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: gold; -fx-border-color: black;" text="Choose file..." />
+            <Label fx:id="pathLabel" layoutX="135.0" layoutY="11.0" text="Path to text file:" />
+            <ImageView fx:id="image" fitHeight="83.0" fitWidth="114.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+         </children></Pane>
+      <TabPane fx:id="tabPane" prefHeight="486.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Words Database">
+               <content>
+                   <fx:include fx:id="tabWords" source="TabWords.fxml" />
+               </content>
+            </Tab>
+             <Tab closable="false" text="Learning">
+                 <content>
+                     <fx:include fx:id="tabLearning" source="TabLearning.fxml" />
+                 </content></Tab>
+         </tabs>
+      </TabPane>
+  </children>
+</VBox>

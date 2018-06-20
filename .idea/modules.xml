@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/IntelliJ projects.iml" filepath="$PROJECT_DIR$/IntelliJ projects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LanguageMemo.iml" filepath="$PROJECT_DIR$/.idea/modules/LanguageMemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LanguageMemo_main.iml" filepath="$PROJECT_DIR$/.idea/modules/LanguageMemo_main.iml" group="LanguageMemoe" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LanguageMemo_test.iml" filepath="$PROJECT_DIR$/.idea/modules/LanguageMemo_test.iml" group="LanguageMemo" />
     </modules>
   </component>
 </project>

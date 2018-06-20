@@ -1,0 +1,25 @@
+.welcometext1 {
+    -fx-font-size: 25;
+    -fx-fill: linear-gradient(from 100% 0% to 100% 84.28%, black, transparent 100%);
+}
+
+.welcometext2 {
+    -fx-font-size: 25;
+    -fx-fill: linear-gradient(from 100% 94.76% to 100% 100%, reflect, black, white 100%);
+}
+
+.textStrikeThrough{
+    -fx-font-size: 25;
+    -fx-fill: black;
+    -fx-strikethrough: true;
+}
+
+.normaltext {
+    -fx-font-size: 25;
+    -fx-fill: black;
+}
+
+.redtext {
+    -fx-font-size: 25;
+    -fx-fill: #FF4855;
+}
