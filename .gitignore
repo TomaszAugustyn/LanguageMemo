@@ -5,3 +5,7 @@ gradle-app.setting
 !gradle-wrapper.jar
 *.iml
 .idea/
+*.ipr
+*.iws
+/out/
+.idea_modules/
