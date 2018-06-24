@@ -1,0 +1,7 @@
+.gradle
+build/
+artifacts/
+gradle-app.setting
+!gradle-wrapper.jar
+*.iml
+.idea/

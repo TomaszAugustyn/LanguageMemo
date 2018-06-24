@@ -2,48 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30a977ad-01fe-4495-9801-fb060042c7ca" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/IntelliJ_projects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/LanguageMemo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/LanguageMemo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/LanguageMemo_main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/LanguageMemo_main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/LanguageMemo_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/LanguageMemo_test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ projects.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controlsfx-8.40.12/controlsfx-8.40.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controlsfx-8.40.12/controlsfx-samples-8.40.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controlsfx-8.40.12/fxsampler-1.0.9.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controlsfx-8.40.12/license.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/richtextfx/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/richtextfx/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/richtextfx/richtextfx-fat-0.7-M5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IntelliJ projects/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IntelliJ projects/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/AutoCompleteSelectedEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/AutoCompleteSelectedEventListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/AutoCompleteTextField.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/TabLearningController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/TabWordsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Tools.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/WordEntry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/WordEntryList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/logo/LM.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/logo/LM.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/logo/LanguageMemo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/logo/NastiaMemo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/logo/thumbDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/logo/thumbUp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/mySwitch.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/view/NastiaMemo.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/view/TabLearning.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/resources/view/TabWords.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribution_package/LanguageMemo.exe" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribution_package/LanguageMemo.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distribution_package/lib/LanguageMemo.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/distribution_package/lib/LanguageMemo.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distributions/LanguageMemo-shadow.tar" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/LanguageMemo-shadow.tar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distributions/LanguageMemo-shadow.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/LanguageMemo-shadow.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distributions/LanguageMemo.tar" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/LanguageMemo.tar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distributions/LanguageMemo.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/LanguageMemo.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/LanguageMemo.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/LanguageMemo.jar" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -95,16 +70,16 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="712">
+            <state relative-caret-position="759">
               <caret line="97" selection-start-line="97" selection-end-line="97" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
+            <state relative-caret-position="79">
               <caret line="254" column="71" selection-start-line="254" selection-start-column="66" selection-end-line="254" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -116,17 +91,17 @@
       <file leaf-file-name="TabWordsController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/TabWordsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-537">
-              <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+            <state relative-caret-position="51">
+              <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TabLearningController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TabLearningController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/TabLearningController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-363">
-              <caret line="71" column="51" lean-forward="true" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="51" />
+            <state relative-caret-position="186">
+              <caret line="71" column="51" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -140,6 +115,8 @@
       <find>ssample</find>
       <find>sample</find>
       <find>utf-8&quot;</find>
+      <find>utf-8</find>
+      <find>UTF_8</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -611,15 +588,15 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="sample&#9;PSI&#9;JAVA://com.sun.media.sound.SoftLinearResampler&#10;simulateClick&#9;PSI&#9;JAVA://app.Tools#simulateClick" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Get2IT/get2it" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/LanguageMemo" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
@@ -641,14 +618,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.LM gradle">
+  <component name="RunManager" selected="Gradle.LanguageMemo [build, run]">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
-    <configuration name="LM gradle" type="GradleRunConfiguration" factoryName="Gradle">
+    <configuration name="LanguageMemo [build, run]" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -757,7 +734,7 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.LanguageMemo [createExe]" />
-      <item itemvalue="Gradle.LM gradle" />
+      <item itemvalue="Gradle.LanguageMemo [build, run]" />
       <item itemvalue="Gradle.LanguageMemo[shadowJar]" />
       <item itemvalue="Gradle.LanguageMemo [createAllExecutables]" />
     </list>
@@ -793,12 +770,15 @@
       <workItem from="1529230193486" duration="247000" />
       <workItem from="1529353709117" duration="95000" />
       <workItem from="1529517465246" duration="29000" />
-      <workItem from="1529518120627" duration="610000" />
+      <workItem from="1529518120627" duration="903000" />
+      <workItem from="1529519307669" duration="400000" />
+      <workItem from="1529746333373" duration="314000" />
+      <workItem from="1529749992419" duration="759000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22365000" />
+    <option name="totallyTimeSpent" value="24131000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -821,11 +801,11 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.32897604" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49253732" visible="true" weight="0.33223322" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.48987207" weight="0.37799564" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49253732" weight="0.33223322" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.48987207" weight="0.37733772" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28411514" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29371002" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.15884861" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1204,20 +1184,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/TabWordsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-537">
-          <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/TabLearningController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-363">
-          <caret line="71" column="51" lean-forward="true" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/WordEntryList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1403">
@@ -1238,13 +1204,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/WordEntry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
@@ -1252,13 +1211,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
+        <state relative-caret-position="79">
           <caret line="254" column="71" selection-start-line="254" selection-start-column="66" selection-end-line="254" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/TabWordsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/TabLearningController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="71" column="51" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="51" />
         </state>
       </provider>
     </entry>
