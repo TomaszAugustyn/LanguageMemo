@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-version: unspecified
-Main-Class: app.Main
-
