@@ -8,5 +8,5 @@ import java.util.EventObject;
  */
 public interface AutoCompleteSelectedEventListener {
 
-    public void handleAutoCompleteSelected(EventObject e, String selectedText);
+    void handleAutoCompleteSelected(EventObject e, String selectedText);
 }

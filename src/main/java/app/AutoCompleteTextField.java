@@ -26,7 +26,7 @@ public class AutoCompleteTextField extends TextField
      * Event Listener to notify that specified entry has been selected from search list.
      * added by: Tomasz Augustyn
      */
-    private List _listeners = new ArrayList();
+    private List<AutoCompleteSelectedEventListener> _listeners = new ArrayList<AutoCompleteSelectedEventListener>();
     public synchronized void addEventListener(AutoCompleteSelectedEventListener listener) {
         _listeners.add(listener);
     }
@@ -40,9 +40,8 @@ public class AutoCompleteTextField extends TextField
      */
     private synchronized void fireEvent(String selectedText) {
         AutoCompleteSelectedEvent event = new AutoCompleteSelectedEvent(this);
-        Iterator i = _listeners.iterator();
-        while(i.hasNext())  {
-            ((AutoCompleteSelectedEventListener) i.next()).handleAutoCompleteSelected(event, selectedText);
+        for (AutoCompleteSelectedEventListener _listener : _listeners) {
+            (_listener).handleAutoCompleteSelected(event, selectedText);
         }
     }
 
@@ -60,9 +59,7 @@ public class AutoCompleteTextField extends TextField
                     entriesPopup.hide();
                 } else
                 {
-                    List<String> searchResult = new ArrayList<>();
-                    final List<String> filteredEntries = entries.stream().filter(e -> e.toLowerCase().contains(getText().toLowerCase())).collect(Collectors.toList());
-                    searchResult.addAll(filteredEntries);
+                    List<String> searchResult = entries.stream().filter(e -> e.toLowerCase().contains(getText().toLowerCase())).collect(Collectors.toList());
                     if (entries.size() > 0)
                     {
                         populatePopup(searchResult);
