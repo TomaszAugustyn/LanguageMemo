@@ -196,7 +196,7 @@ public class TabLearningController {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "The word you wrote is empty. Please give your answer.", ButtonType.OK);
         alert.showAndWait();
-        Main.vanishGlowEffect(this.answerField);
+        Tools.vanishGlowEffect(this.answerField);
         answerField.requestFocus();
 
     }

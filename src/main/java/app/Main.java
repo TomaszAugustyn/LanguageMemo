@@ -1,26 +1,20 @@
 package app;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -55,11 +49,6 @@ public class Main extends Application {
     private static final double DEFAULT_DIVIDER_POSITION = 0.3785;
     private static final int GAP_BETWEEN_LABEL_AND_FILEPATH = 20;
 
-    private static final double DROP_SHADOW_OFFSET_X = 0f;
-    private static final double DROP_SHADOW_OFFSET_Y = 0f;
-    private static final double DROP_SHADOW_RADIUS = 16.0;
-
-    public static DropShadow borderGlow;
 
     @Override
     public void start(Stage stage) throws Exception{
@@ -76,7 +65,6 @@ public class Main extends Application {
         stage.show();
         scene.getStylesheets().add("mySwitch.css");
         scene.getStylesheets().add("styles.css");
-        initializeBorderGlow();
 
         loadedFile = new File(System.getProperty("user.dir") + "\\LanguageMemo.txt");
         if (!loadedFile.exists()) {
@@ -97,38 +85,15 @@ public class Main extends Application {
 
     }
 
-    private void initializeBorderGlow() {
-        borderGlow = new DropShadow();
-        //borderGlow.setColor(Color.valueOf("#FF4855"));
-        borderGlow.setColor(Color.RED);
-        borderGlow.setOffsetX(DROP_SHADOW_OFFSET_X);
-        borderGlow.setOffsetY(DROP_SHADOW_OFFSET_Y);
-        borderGlow.setRadius(DROP_SHADOW_RADIUS);
-    }
-
-    public static void vanishGlowEffect(Node node)
-    {
-        DropShadow vanishingShadow = (DropShadow)borderGlow.impl_copy();
-        node.setEffect(vanishingShadow);
-        final Timeline timeline = new Timeline();
-        //timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.setCycleCount(1);
-        timeline.setAutoReverse(true);
-        final KeyValue kv = new KeyValue(vanishingShadow.radiusProperty(), 0.0);
-        final KeyFrame kf = new KeyFrame(Duration.millis(1000), kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.play();
-    }
-
     private void addHeightAndWidthListeners() {
         scene.widthProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                    Double dxWidth = (Double)newValue - (Double)oldValue;
+                    double dxWidth = (double)newValue - (double)oldValue;
                     filePath.setPrefWidth(filePath.getWidth() + dxWidth);
                     fileChooser.setLayoutX(fileChooser.getLayoutX() + dxWidth);
                     tabWordsController.splitPane.setPrefWidth(tabWordsController.splitPane.getWidth() + dxWidth);
                     tabWordsController.addAndDeleteRegion.setPrefWidth(tabWordsController.addAndDeleteRegion.getWidth() + dxWidth);
-                    tabWordsController.table.setPrefWidth((Double)newValue*DEFAULT_DIVIDER_POSITION);
+                    tabWordsController.table.setPrefWidth((double)newValue*DEFAULT_DIVIDER_POSITION);
                     tabWordsController.splitPane.setDividerPositions(tabWordsController.table.getWidth());
                     tabLearningController.englishWordLabel.setPrefWidth(tabLearningController.englishWordLabel.getWidth() + dxWidth);
                     tabLearningController.polishWordLabel.setPrefWidth(tabLearningController.polishWordLabel.getWidth() + dxWidth);
@@ -136,7 +101,7 @@ public class Main extends Application {
 
         scene.heightProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                    Double dxHeight = (Double)newValue - (Double)oldValue;
+                    double dxHeight = (double)newValue - (double)oldValue;
                     if(dxHeight > 0){
                         tabPane.setPrefHeight(tabPane.getHeight() + dxHeight);
                         filePathPane.setPrefHeight(filePathPane.getHeight() + dxHeight);
@@ -175,10 +140,7 @@ public class Main extends Application {
                 initialWordEntryList = wordEntryList;
                 return true;
             }
-            else if(result.isPresent() && result.get() == fakeNoButton) {
-                return true;
-            }
-            return false;
+            else return result.isPresent() && result.get() == fakeNoButton;
 
         }
         return true;
