@@ -205,8 +205,8 @@ public class TabWordsController {
     }
 
     private void initTable() {
-        wordColumn = new TableColumn("Word");
-        translationColumn = new TableColumn("Translation");
+        wordColumn = new TableColumn<>("Word");
+        translationColumn = new TableColumn<>("Translation");
         wordColumn.impl_setWidth(WORD_COLUMN_DEFAULT_WIDTH);
         translationColumn.impl_setWidth(TRANSLATION_COLUMN_DEFAULT_WIDTH);
 

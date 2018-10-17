@@ -2,8 +2,6 @@ package app;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * This is WordEntry class that manages word and translation strings
@@ -48,16 +46,16 @@ public class WordEntry {
         String translation = this.getTranslation();
 
         String wordOrTranslation = conversionType == ENG_2_POL ? translation : word;
-        String modified = "";
-        List<String> items = Arrays.asList(wordOrTranslation.split("\\s+"));
+        StringBuilder modified = new StringBuilder();
+        String[] items = wordOrTranslation.split("\\s+");
         for (String s : items) {
             String underscoredStr = s.replaceAll("[\\S&&[^-]&&[^']&&[^/]&&[^)]&&[^(]&&[^!]&&[^,]&&[^.]&&[^?]&&[^\"]&&[^&]&&[^:]&&[^;]]", "_ ");
             String modifiedSingle = String.valueOf(s.charAt(0))
-                    + underscoredStr.substring(1, underscoredStr.length());
-            modified = new StringBuilder().append(modified).append(modifiedSingle).append("  ").toString();
+                    + underscoredStr.substring(1);
+            modified.append(modifiedSingle).append("  ");
         }
 
-        return conversionType == ENG_2_POL ? new WordEntry(word, modified) : new WordEntry(modified, translation);
+        return conversionType == ENG_2_POL ? new WordEntry(word, modified.toString()) : new WordEntry(modified.toString(), translation);
 
     }
 
